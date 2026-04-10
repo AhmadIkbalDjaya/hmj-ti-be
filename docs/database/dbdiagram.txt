@@ -1,0 +1,64 @@
+Table articles {
+  id int PK
+  slug varchar [not null, unique]
+  title varchar [not null]
+  content longtext [not null]
+  publish_at timestamp [not null]
+  image varchar [not null]
+  is_active bool [not null, default: true]
+  is_featured bool [not null, default: false]
+
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table businesses {
+  id int PK
+  slug varchar [not null, unique]
+  title varchar [not null]
+  description longtext [not null]
+  price bigint [not null]
+  image varchar [not null]
+  whatsapp varchar [not null]
+  is_active bool [not null, default: true]
+
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table complaints {
+  id int PK
+  name varchar [not null]
+  email varchar [null]
+  phone varchar [null]
+  institute varchar [null]
+  description varchar [not null]
+  
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table positions {
+  id int PK
+  name varchar [not null]
+  slug varchar [unique, not null]
+  parent_id int [null]
+  level int [default: 0] // 0: Presidium, 1: Wakil Ketua, 2: Ketua Bidang, 3: Anggota
+  order_index int [default: 0]
+  is_active bool [default: true]
+
+  created_at timestamp
+  updated_at timestamp
+}
+Ref: positions.parent_id < positions.id [update: cascade, delete: set null]
+
+Table members {
+  id int PK
+  name varchar [not null]
+  photo varchar [null]
+  position_id int [not null]
+
+  created_at timestamp
+  updated_at timestamp
+}
+Ref: members.position_id < positions.id [update: cascade, delete: restrict]
