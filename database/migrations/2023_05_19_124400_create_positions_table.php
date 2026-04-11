@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('positions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('photo')->nullable();
-            $table->foreignId('position_id')->constrained('positions')->cascadeOnUpdate()->restrictOnDelete();
+            $table->string('slug')->unique();
+            $table->foreignId('parent_id')->nullable()->constrained('positions')->cascadeOnUpdate()->nullOnDelete();
+            $table->integer('level')->default(0);
+            $table->integer('order_index')->default(0);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('positions');
     }
 };

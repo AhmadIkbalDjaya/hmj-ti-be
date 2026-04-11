@@ -17,8 +17,11 @@ class ComplaintFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->name(),
-            "description" => fake()->sentences(8, true),
+            'name' => fake()->name(),
+            'email' => fake()->optional(0.7)->safeEmail(),
+            'phone' => fake()->optional(0.5)->numerify('08##########'),
+            'institute' => fake()->optional(0.6)->company(),
+            'description' => fake()->paragraphs(rand(1, 3), true),
         ];
     }
 }

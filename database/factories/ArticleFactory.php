@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
@@ -17,15 +17,35 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->sentence(3, true);
+        $title = fake()->sentence(rand(3, 6), true);
         return [
-            "title" => $title,
-            "slug" => strtolower(str_replace(" ", "-", $title)),
-            "description" => fake()->sentences(15, true),
-            "image" => "image.jpg",
-            "publish_date" => Carbon::today()->subDays(rand(0, 180)),
-            "isHeader" => fake()->randomElement([0,1]),
-            "isActive" => fake()->randomElement([0,1]),
+            'title' => $title,
+            'slug' => Str::slug($title) . '-' . Str::random(5),
+            'content' => fake()->paragraphs(rand(3, 8), true),
+            'publish_at' => fake()->dateTimeBetween('-6 months', 'now'),
+            'image' => 'articles/default.jpg',
+            'is_active' => true,
+            'is_featured' => fake()->boolean(20),
         ];
+    }
+
+    /**
+     * Indicate that the article is featured.
+     */
+    public function featured(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_featured' => true,
+        ]);
+    }
+
+    /**
+     * Indicate that the article is inactive.
+     */
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_active' => false,
+        ]);
     }
 }

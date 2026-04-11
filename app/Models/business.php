@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Business extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'price' => 'integer',
+        'is_active' => 'boolean',
+    ];
 }

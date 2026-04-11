@@ -32,7 +32,7 @@ Table complaints {
   email varchar [null]
   phone varchar [null]
   institute varchar [null]
-  description varchar [not null]
+  description longtext [not null]
   
   created_at timestamp
   updated_at timestamp

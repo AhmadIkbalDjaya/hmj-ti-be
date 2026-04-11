@@ -164,7 +164,8 @@
                         "name": "is_featured",
                         "description": "Filter by featured status"
                     }
-                ]
+                ],
+                "security": []
             }
         },
         "/articles/{id}": {
@@ -272,7 +273,8 @@
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
-                }
+                },
+                "security": []
             }
         },
         "/business": {
@@ -391,7 +393,8 @@
                     {
                         "$ref": "#/components/parameters/accept-json"
                     }
-                ]
+                ],
+                "security": []
             }
         },
         "/complaints": {
@@ -458,7 +461,8 @@
                             }
                         }
                     }
-                }
+                },
+                "security": []
             }
         },
         "/organizational-structure": {
@@ -594,7 +598,8 @@
                     {
                         "$ref": "#/components/parameters/accept-json"
                     }
-                ]
+                ],
+                "security": []
             }
         },
         "/user/login": {
@@ -708,7 +713,8 @@
                     {
                         "$ref": "#/components/parameters/accept-json"
                     }
-                ]
+                ],
+                "security": []
             },
             "parameters": []
         },

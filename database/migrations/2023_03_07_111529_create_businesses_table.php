@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('title');
             $table->longText('description');
-            $table->decimal('price', 5, 3);
-            $table->boolean('isActive');
+            $table->bigInteger('price');
             $table->string('image');
+            $table->string('whatsapp');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
