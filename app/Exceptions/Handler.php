@@ -11,25 +11,25 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
-    public function unauthenticated($request, AuthenticationException $exception)
-    {
-        return response()->json([
-            "code" => 401,
-            "status" => "Unauthorized",
-            "message" => "Unauthenticated",
-            "errors" => "Unauthenticated",
-        ], 401);
-    }
+    // public function unauthenticated($request, AuthenticationException $exception)
+    // {
+    //     return response()->json([
+    //         "code" => 401,
+    //         "status" => "Unauthorized",
+    //         "message" => "Unauthenticated",
+    //         "errors" => "Unauthenticated",
+    //     ], 401);
+    // }
 
-    public function invalidJson($request, ValidationException $exception)
-    {
-        return response()->json([
-            "code" => $exception->status,
-            "status" => "Unprocessable Content",
-            "message" => "The given data wan invalid",
-            "errors" => $exception->errors(),
-        ], $exception->status);
-    }
+    // public function invalidJson($request, ValidationException $exception)
+    // {
+    //     return response()->json([
+    //         "code" => $exception->status,
+    //         "status" => "Unprocessable Content",
+    //         "message" => "The given data wan invalid",
+    //         "errors" => $exception->errors(),
+    //     ], $exception->status);
+    // }
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -67,15 +67,15 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-        $this->renderable(function (NotFoundHttpException $e, $request) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    "code" => "404",
-                    "status" => "Not Found",
-                    "message" => "Not Found",
-                    "errors" => "Not Found",
-                ], 404);
-            }
-        });
+        // $this->renderable(function (NotFoundHttpException $e, $request) {
+        //     if ($request->wantsJson()) {
+        //         return response()->json([
+        //             "code" => "404",
+        //             "status" => "Not Found",
+        //             "message" => "Not Found",
+        //             "errors" => "Not Found",
+        //         ], 404);
+        //     }
+        // });
     }
 }

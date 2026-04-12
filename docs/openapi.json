@@ -4,9 +4,9 @@
         "id": "o54t7pvfer80i"
     },
     "info": {
-        "title": "Our Village Tenant",
+        "title": "HMJ TI UINAM",
         "version": "1.0",
-        "description": "Public Our Village Tenant API",
+        "description": "HMJ TI UINAM API",
         "contact": {
             "email": "ikbaldjaya@gmail.com",
             "name": "ikbal djaya",
@@ -646,7 +646,7 @@
                                                     ],
                                                     "properties": {
                                                         "id": {
-                                                            "type": "string",
+                                                            "type": "integer",
                                                             "x-stoplight": {
                                                                 "id": "pr5qxt1vpw3ah"
                                                             }
@@ -672,6 +672,9 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
                     },
                     "422": {
                         "$ref": "#/components/responses/422"
@@ -741,6 +744,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -855,6 +861,9 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -928,6 +937,15 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     }
                 },
                 "operationId": "post-user-articles",
@@ -972,7 +990,7 @@
                                         "x-stoplight": {
                                             "id": "1nfcqa16fyr5d"
                                         },
-                                        "format": "date"
+                                        "format": "date-time"
                                     },
                                     "is_active": {
                                         "type": "boolean",
@@ -1052,6 +1070,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1103,6 +1124,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1218,6 +1242,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1298,6 +1325,9 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -1354,6 +1384,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "422": {
                         "$ref": "#/components/responses/422"
@@ -1453,6 +1486,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1495,6 +1531,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1580,6 +1619,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1659,6 +1701,9 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -1721,6 +1766,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -1760,6 +1808,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -1839,6 +1890,9 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -1903,6 +1957,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "422": {
                         "$ref": "#/components/responses/422"
@@ -1995,6 +2052,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -2037,6 +2097,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -2116,6 +2179,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -2189,6 +2255,9 @@
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -2245,6 +2314,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "422": {
                         "$ref": "#/components/responses/422"
@@ -2324,6 +2396,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -2366,6 +2441,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"
@@ -2432,6 +2510,9 @@
                             }
                         }
                     },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
                     "404": {
                         "$ref": "#/components/responses/404"
                     },
@@ -2462,7 +2543,7 @@
                     "id": "e6yxdqjzuv581"
                 },
                 "type": "object",
-                "required": ["created_at", "update_at"],
+                "required": ["created_at", "updated_at"],
                 "properties": {
                     "created_at": {
                         "type": "string",
@@ -2471,7 +2552,7 @@
                         },
                         "format": "date-time"
                     },
-                    "update_at": {
+                    "updated_at": {
                         "type": "string",
                         "x-stoplight": {
                             "id": "rdhd0fscbkurw"
@@ -2936,36 +3017,30 @@
                             "properties": {
                                 "message": {
                                     "type": "string",
+                                    "example": "The given data was invalid.",
                                     "x-stoplight": {
                                         "id": "qxryeauyfyvb1"
                                     }
                                 },
                                 "errors": {
-                                    "type": "array",
+                                    "type": "object",
+                                    "example": {
+                                        "nama_field": [
+                                            "The nama field is required.",
+                                            "The nama must be a string."
+                                        ],
+                                        "email": [
+                                            "The email has already been taken."
+                                        ]
+                                    },
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
                                     "x-stoplight": {
                                         "id": "33263nxbnwboy"
-                                    },
-                                    "items": {
-                                        "x-stoplight": {
-                                            "id": "07pg4fht1g0yv"
-                                        },
-                                        "type": "object",
-                                        "required": ["field", "message"],
-                                        "properties": {
-                                            "field": {
-                                                "type": "string",
-                                                "x-stoplight": {
-                                                    "id": "q13pwzi502u9w"
-                                                }
-                                            },
-                                            "message": {
-                                                "type": "array",
-                                                "x-stoplight": {
-                                                    "id": "dzwbcf1o95hir"
-                                                },
-                                                "items": {}
-                                            }
-                                        }
                                     }
                                 }
                             }
