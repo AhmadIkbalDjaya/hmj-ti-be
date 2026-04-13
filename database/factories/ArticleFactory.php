@@ -18,9 +18,10 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         $title = fake()->sentence(rand(3, 6), true);
+
         return [
             'title' => $title,
-            'slug' => Str::slug($title) . '-' . Str::random(5),
+            'slug' => Str::slug($title).'-'.Str::random(5),
             'content' => fake()->paragraphs(rand(3, 8), true),
             'publish_at' => fake()->dateTimeBetween('-6 months', 'now'),
             'image' => 'articles/default.jpg',

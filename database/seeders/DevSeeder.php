@@ -98,7 +98,7 @@ class DevSeeder extends Seeder
         foreach ($bidangs as $bidang) {
             $anggotaCount = rand(2, 4);
             for ($i = 1; $i <= $anggotaCount; $i++) {
-                $anggotaName = "Anggota " . Str::afterLast($bidang->name, 'Bidang ') . " {$i}";
+                $anggotaName = 'Anggota '.Str::afterLast($bidang->name, 'Bidang ')." {$i}";
                 Position::create([
                     'name' => $anggotaName,
                     'slug' => Str::slug($anggotaName),

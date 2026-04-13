@@ -3,11 +3,10 @@
 namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
-use Throwable;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Spatie\FlareClient\Http\Exceptions\NotFound;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {

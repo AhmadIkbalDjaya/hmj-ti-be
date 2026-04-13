@@ -291,7 +291,7 @@
                                     "required": ["message", "data", "meta"],
                                     "properties": {
                                         "message": {
-                                            "type": "object",
+                                            "type": "string",
                                             "x-stoplight": {
                                                 "id": "daojleg0zmp28"
                                             }

@@ -2,16 +2,31 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Models\Business;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BusinessResource;
-use App\Http\Controllers\API\ResponseController;
+use App\Http\Requests\PaginateSearchRequest;
+use App\Http\Resources\Guest\BusinessResource;
+use App\Http\Resources\MetaPaginateResource;
+use App\Models\Business;
+use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 
 class BusinessController extends Controller
 {
-    public function index () {
-        $data = Business::where('isActive', 1)->latest()->get();
-        return ResponseController::create(BusinessResource::collection($data), 'success', 'Data retrieved successfully', 200);
+    use HttpResponses;
+
+    public function index(PaginateSearchRequest $request): JsonResponse
+    {
+        $page = $request->input('page', 1);
+        $limit = $request->input('limit', 10);
+
+        $businesses = Business::query()
+            ->where('is_active', true)
+            ->latest()
+            ->paginate($limit, ['*'], 'page', $page);
+
+        $data = BusinessResource::collection($businesses);
+        $meta = new MetaPaginateResource($businesses);
+
+        return $this->respondSuccessWithMeta($data, $meta);
     }
 }

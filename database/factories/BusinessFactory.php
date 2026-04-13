@@ -18,13 +18,14 @@ class BusinessFactory extends Factory
     public function definition(): array
     {
         $title = fake()->sentence(rand(2, 5), true);
+
         return [
             'title' => $title,
-            'slug' => Str::slug($title) . '-' . Str::random(5),
+            'slug' => Str::slug($title).'-'.Str::random(5),
             'description' => fake()->paragraphs(rand(2, 5), true),
             'price' => fake()->randomElement([5000, 10000, 15000, 25000, 35000, 50000, 75000, 100000]),
             'image' => 'businesses/default.jpg',
-            'whatsapp' => '08' . fake()->numerify('##########'),
+            'whatsapp' => '08'.fake()->numerify('##########'),
             'is_active' => true,
         ];
     }

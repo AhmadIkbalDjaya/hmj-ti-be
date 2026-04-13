@@ -2,21 +2,46 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Models\Article;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ArticleResource;
-use App\Http\Resources\ArticleDetailResource;
-use App\Http\Controllers\API\ResponseController;
+use App\Http\Requests\PaginateSearchRequest;
+use App\Http\Resources\Guest\ArticleDetailResource;
+use App\Http\Resources\Guest\ArticleResource;
+use App\Http\Resources\MetaPaginateResource;
+use App\Models\Article;
+use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 
 class ArticleController extends Controller
 {
-    public function index () {
-      $data = Article::where('isActive', 1)->latest()->get();
-      return ResponseController::create(ArticleResource::collection($data), 'success', 'Data retrieved successfully', 200);
+    use HttpResponses;
+
+    public function index(PaginateSearchRequest $request): JsonResponse
+    {
+        $page = $request->input('page', 1);
+        $limit = $request->input('limit', 10);
+        $search = $request->input('search', '');
+        $is_featured = $request->input('is_featured', null);
+
+        $articles = Article::query()
+            ->select(['id', 'title', 'slug', 'content', 'publish_at', 'image', 'is_featured'])
+            ->where('is_active', true)
+            ->when($search, fn ($query) => $query->where(fn ($query) => $query->where('title', 'LIKE', "%$search%")
+                ->orWhere('content', 'LIKE', "%$search%")
+            )
+            )
+            ->when(! is_null($is_featured), fn ($query) => $query->where('is_featured', $is_featured)
+            )
+            ->latest()
+            ->paginate($limit, ['*'], 'page', $page);
+
+        $data = ArticleResource::collection($articles);
+        $meta = new MetaPaginateResource($articles);
+
+        return $this->respondSuccessWithMeta($data, $meta);
     }
 
-    public function show (Article $article) {
-      return ResponseController::create(new ArticleDetailResource($article), 'success', 'Data retrieved successfully', 200);
+    public function show(Article $article): JsonResponse
+    {
+        return $this->respondSuccess(new ArticleDetailResource($article));
     }
 }

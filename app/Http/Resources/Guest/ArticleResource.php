@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Guest;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ArticleResource extends JsonResource
@@ -16,11 +15,13 @@ class ArticleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "slug" => $this->slug,
-            "title" => $this->title,
-            "description" => $this->description,
-            "image" => url("storage/$this->image"),
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'content' => $this->content,
+            'publish_at' => $this->publish_at,
+            'image' => $this->image_url,
+            'is_featured' => $this->is_featured,
         ];
     }
 }
