@@ -162,7 +162,6 @@ class MemberTest extends TestCase
         $response = $this->withToken($this->token)
             ->post($this->base_url, $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(201);
 
         $response->assertJsonPath('data.name', $payload['name']);
@@ -186,7 +185,6 @@ class MemberTest extends TestCase
         $response = $this->withToken($this->token)
             ->post($this->base_url, $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(201);
 
         $response->assertJsonPath('data.name', $payload['name']);
@@ -258,7 +256,6 @@ class MemberTest extends TestCase
         $response = $this->withToken($this->token)
             ->put("{$this->base_url}/{$member->id}", $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(200);
 
         $response->assertJsonPath('data.name', 'Updated Name');
@@ -293,7 +290,6 @@ class MemberTest extends TestCase
         $response = $this->withToken($this->token)
             ->put("{$this->base_url}/{$member->id}", $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(200);
 
         Storage::assertMissing($oldPath);

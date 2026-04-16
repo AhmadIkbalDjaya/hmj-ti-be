@@ -151,13 +151,14 @@ class PositionTest extends TestCase
         $payload = [
             'name' => 'Ketua Umum',
             'slug' => 'ketua-umum',
+            'parent_id' => null,
             'level' => 1,
             'order_index' => 1,
             'is_active' => true,
         ];
 
         $response = $this->withToken($this->token)
-            ->post($this->base_url, $payload);
+            ->postJson($this->base_url, $payload);
 
         $response->assertValidRequest();
         $response->assertValidResponse(201);
@@ -185,7 +186,7 @@ class PositionTest extends TestCase
         ];
 
         $response = $this->withToken($this->token)
-            ->post($this->base_url, $payload);
+            ->postJson($this->base_url, $payload);
 
         $response->assertValidRequest();
         $response->assertValidResponse(201);
@@ -198,11 +199,13 @@ class PositionTest extends TestCase
         $payload = [
             'name' => 'Ketua Umum',
             'slug' => 'ketua-umum',
+            'parent_id' => null,
             'level' => 1,
+            'order_index' => 1,
             'is_active' => true,
         ];
 
-        $response = $this->post($this->base_url, $payload);
+        $response = $this->postJson($this->base_url, $payload);
 
         $response->assertValidResponse(401);
     }
@@ -217,7 +220,7 @@ class PositionTest extends TestCase
         ];
 
         $response = $this->withToken($this->token)
-            ->post($this->base_url, $payload);
+            ->postJson($this->base_url, $payload);
 
         $response->assertValidResponse(422);
 
@@ -233,12 +236,14 @@ class PositionTest extends TestCase
         $payload = [
             'name' => 'Another Position',
             'slug' => 'existing-slug',
+            'parent_id' => null,
             'level' => 1,
+            'order_index' => 1,
             'is_active' => true,
         ];
 
         $response = $this->withToken($this->token)
-            ->post($this->base_url, $payload);
+            ->postJson($this->base_url, $payload);
 
         $response->assertValidRequest();
         $response->assertValidResponse(422);
@@ -263,7 +268,7 @@ class PositionTest extends TestCase
         ];
 
         $response = $this->withToken($this->token)
-            ->put("{$this->base_url}/{$position->id}", $payload);
+            ->putJson("{$this->base_url}/{$position->id}", $payload);
 
         $response->assertValidRequest();
         $response->assertValidResponse(200);
@@ -285,11 +290,13 @@ class PositionTest extends TestCase
         $payload = [
             'name' => 'Updated Position',
             'slug' => 'updated-position',
+            'parent_id' => null,
             'level' => 2,
+            'order_index' => 1,
             'is_active' => true,
         ];
 
-        $response = $this->put("{$this->base_url}/{$position->id}", $payload);
+        $response = $this->putJson("{$this->base_url}/{$position->id}", $payload);
 
         $response->assertValidResponse(401);
     }
@@ -299,12 +306,14 @@ class PositionTest extends TestCase
         $payload = [
             'name' => 'Updated Position',
             'slug' => 'updated-position',
+            'parent_id' => null,
             'level' => 2,
+            'order_index' => 1,
             'is_active' => true,
         ];
 
         $response = $this->withToken($this->token)
-            ->put("{$this->base_url}/999", $payload);
+            ->putJson("{$this->base_url}/999", $payload);
 
         $response->assertValidResponse(404);
     }
@@ -321,7 +330,7 @@ class PositionTest extends TestCase
         ];
 
         $response = $this->withToken($this->token)
-            ->put("{$this->base_url}/{$position->id}", $payload);
+            ->putJson("{$this->base_url}/{$position->id}", $payload);
 
         $response->assertValidResponse(422);
 
@@ -338,12 +347,14 @@ class PositionTest extends TestCase
         $payload = [
             'name' => 'Updated Position',
             'slug' => 'taken-slug',
+            'parent_id' => null,
             'level' => 2,
+            'order_index' => 1,
             'is_active' => true,
         ];
 
         $response = $this->withToken($this->token)
-            ->put("{$this->base_url}/{$position->id}", $payload);
+            ->putJson("{$this->base_url}/{$position->id}", $payload);
 
         $response->assertValidResponse(422);
 

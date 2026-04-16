@@ -960,7 +960,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "required": [
@@ -1155,7 +1155,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "required": [
@@ -1404,7 +1404,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "required": [
@@ -1559,7 +1559,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "required": [
@@ -1977,13 +1977,15 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
                                 "type": "object",
                                 "required": [
                                     "name",
                                     "slug",
+                                    "parent_id",
                                     "level",
+                                    "order_index",
                                     "is_active"
                                 ],
                                 "properties": {
@@ -2125,7 +2127,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
                                 "type": "object",
                                 "required": [
@@ -2334,7 +2336,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "required": ["name", "position_id"],
@@ -2469,7 +2471,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "required": ["name", "position_id"],
@@ -2771,7 +2773,9 @@
                     "id",
                     "name",
                     "slug",
+                    "parent_id",
                     "level",
+                    "order_index",
                     "is_active",
                     "created_at",
                     "updated_at"

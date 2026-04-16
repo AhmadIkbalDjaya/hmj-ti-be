@@ -26,12 +26,12 @@ class DevSeeder extends Seeder
         ]);
 
         // Seed Articles
-        Article::factory()->count(8)->create();
-        Article::factory()->count(2)->featured()->create();
+        Article::factory()->count(16)->create();
+        Article::factory()->count(4)->featured()->create();
 
         // Seed Businesses
-        Business::factory()->count(8)->create();
-        Business::factory()->count(2)->inactive()->create();
+        Business::factory()->count(16)->create();
+        Business::factory()->count(4)->inactive()->create();
 
         // Seed Complaints
         Complaint::factory()->count(15)->create();

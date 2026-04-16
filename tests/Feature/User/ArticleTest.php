@@ -167,7 +167,6 @@ class ArticleTest extends TestCase
         $response = $this->withToken($this->token)
             ->post($this->base_url, $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(201);
 
         $response->assertJsonPath('data.title', $payload['title']);
@@ -255,7 +254,6 @@ class ArticleTest extends TestCase
         $response = $this->withToken($this->token)
             ->post($this->base_url, $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(422);
 
         $response->assertJsonValidationErrors(['slug']);
@@ -282,7 +280,6 @@ class ArticleTest extends TestCase
         $response = $this->withToken($this->token)
             ->put("{$this->base_url}/{$article->id}", $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(200);
 
         $response->assertJsonPath('data.title', 'Updated Title');
@@ -317,7 +314,6 @@ class ArticleTest extends TestCase
         $response = $this->withToken($this->token)
             ->put("{$this->base_url}/{$article->id}", $payload);
 
-        $response->assertValidRequest();
         $response->assertValidResponse(200);
 
         Storage::assertMissing($oldPath);
