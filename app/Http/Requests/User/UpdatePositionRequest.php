@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePositionRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class UpdatePositionRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'slug' => 'required|string|unique:positions',
+            'slug' => ['required', 'string', Rule::unique('positions')->ignore($this->route('position'))],
             'parent_id' => 'nullable|integer|exists:positions,id',
             'level' => 'required|integer',
             'order_index' => 'nullable|integer',

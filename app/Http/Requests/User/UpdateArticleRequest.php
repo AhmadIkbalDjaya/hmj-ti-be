@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateArticleRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class UpdateArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'slug' => 'required|string|unique:articles',
+            'slug' => ['required', 'string', Rule::unique('articles')->ignore($this->route('article'))],
             'publish_at' => 'required|date',
             'is_active' => 'required|boolean',
             'is_featured' => 'required|boolean',

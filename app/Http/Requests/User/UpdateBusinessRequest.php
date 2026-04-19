@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateBusinessRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class UpdateBusinessRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'slug' => 'required|string|unique:businesses',
+            'slug' => ['required', 'string', Rule::unique('businesses')->ignore($this->route('business'))],
             'description' => 'required|string',
             'price' => 'required|integer',
             'image' => 'nullable|image|mimes:jpg,jpeg,png',
