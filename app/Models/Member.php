@@ -13,6 +13,13 @@ class Member extends Model
 
     protected $guarded = ['id'];
 
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['position:id,name'];
+
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class);

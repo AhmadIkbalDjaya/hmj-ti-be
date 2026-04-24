@@ -77,6 +77,7 @@ class MemberController extends Controller
             }
 
             $member->update($validated);
+            $member->refresh();
 
             return $this->respondSuccess(new MemberDetailResource($member));
         } catch (\Throwable $th) {

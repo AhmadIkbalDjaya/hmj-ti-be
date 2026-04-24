@@ -122,7 +122,7 @@ class MemberTest extends TestCase
 
         $response->assertJsonPath('data.id', $member->id);
         $response->assertJsonPath('data.name', $member->name);
-        $response->assertJsonPath('data.position_id', $position->id);
+        $response->assertJsonPath('data.position.id', $position->id);
     }
 
     public function test_show_member_unauthenticated(): void
@@ -165,7 +165,7 @@ class MemberTest extends TestCase
         $response->assertValidResponse(201);
 
         $response->assertJsonPath('data.name', $payload['name']);
-        $response->assertJsonPath('data.position_id', $position->id);
+        $response->assertJsonPath('data.position.id', $position->id);
 
         $this->assertDatabaseHas('members', [
             'name' => $payload['name'],
@@ -259,7 +259,7 @@ class MemberTest extends TestCase
         $response->assertValidResponse(200);
 
         $response->assertJsonPath('data.name', 'Updated Name');
-        $response->assertJsonPath('data.position_id', $newPosition->id);
+        $response->assertJsonPath('data.position.id', $newPosition->id);
 
         $this->assertDatabaseHas('members', [
             'id' => $member->id,

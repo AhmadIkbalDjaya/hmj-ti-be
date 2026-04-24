@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Resources\IdNameResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class MemberDetailResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'photo' => $this->photo_url,
-            'position_id' => $this->position_id,
+            'position' => new IdNameResource($this->position),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ], fn ($value) => ! is_null($value));

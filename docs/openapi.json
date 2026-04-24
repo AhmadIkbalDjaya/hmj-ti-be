@@ -2228,7 +2228,7 @@
                                                 "required": [
                                                     "id",
                                                     "name",
-                                                    "position_id"
+                                                    "position"
                                                 ],
                                                 "properties": {
                                                     "id": {
@@ -2240,8 +2240,29 @@
                                                     "photo": {
                                                         "type": "string"
                                                     },
-                                                    "position_id": {
-                                                        "type": "integer"
+                                                    "position": {
+                                                        "type": "object",
+                                                        "x-stoplight": {
+                                                            "id": "9m0y7debcp8o9"
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "name"
+                                                        ],
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "x-stoplight": {
+                                                                    "id": "sv7seuzzh7wus"
+                                                                }
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "x-stoplight": {
+                                                                    "id": "bv1ebh0oth5zw"
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -2818,7 +2839,7 @@
                 "required": [
                     "id",
                     "name",
-                    "position_id",
+                    "position",
                     "created_at",
                     "updated_at"
                 ],
@@ -2833,8 +2854,26 @@
                         "type": "string",
                         "format": "uri"
                     },
-                    "position_id": {
-                        "type": "integer"
+                    "position": {
+                        "type": "object",
+                        "x-stoplight": {
+                            "id": "yxri6e77vxcky"
+                        },
+                        "required": ["id", "name"],
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "x-stoplight": {
+                                    "id": "zug5gjq7wa4t8"
+                                }
+                            },
+                            "name": {
+                                "type": "string",
+                                "x-stoplight": {
+                                    "id": "mosxeeou3tc8q"
+                                }
+                            }
+                        }
                     },
                     "created_at": {
                         "type": "string",

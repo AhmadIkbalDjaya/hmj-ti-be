@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources;
 
-use App\Http\Resources\IdNameResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MemberResource extends JsonResource
+class IdNameResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +14,9 @@ class MemberResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return array_filter([
+        return parent::toArray($request) + [
             'id' => $this->id,
             'name' => $this->name,
-            'photo' => $this->photo,
-            'position' => new IdNameResource($this->position),
-        ], fn ($value) => ! is_null($value));
+        ];
     }
 }
