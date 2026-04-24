@@ -769,6 +769,119 @@
                 ]
             }
         },
+        "/user/dashboard/summary": {
+            "get": {
+                "summary": "Dashboard Summary",
+                "tags": ["Admin"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": ["message", "data"],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "ppucah4fv7n3k"
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "x-stoplight": {
+                                                "id": "3bgsjldw2ogzr"
+                                            },
+                                            "required": [
+                                                "articles",
+                                                "businesses",
+                                                "members",
+                                                "complaints"
+                                            ],
+                                            "properties": {
+                                                "articles": {
+                                                    "type": "object",
+                                                    "x-stoplight": {
+                                                        "id": "9yti6igd8lzza"
+                                                    },
+                                                    "required": ["total"],
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "65f0dm7x8fq8j"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "businesses": {
+                                                    "type": "object",
+                                                    "x-stoplight": {
+                                                        "id": "avnchdazxtgdo"
+                                                    },
+                                                    "required": ["total"],
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "f85397l4z5ujw"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "members": {
+                                                    "type": "object",
+                                                    "x-stoplight": {
+                                                        "id": "onwzh8zzgyiw9"
+                                                    },
+                                                    "required": ["total"],
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "mrigmb0xe0hzc"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "complaints": {
+                                                    "type": "object",
+                                                    "x-stoplight": {
+                                                        "id": "yb0c0lq4ex2ik"
+                                                    },
+                                                    "required": ["total"],
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "9xcssyiiuwzd3"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "get-user-dashboard-summary",
+                "x-stoplight": {
+                    "id": "xzk6k2p8hu8g3"
+                },
+                "description": "Get data summary for dashboard"
+            }
+        },
         "/user/articles": {
             "get": {
                 "summary": "Get Articles",
