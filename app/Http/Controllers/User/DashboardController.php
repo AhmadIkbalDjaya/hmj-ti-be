@@ -19,9 +19,11 @@ class DashboardController extends Controller
         $data = [
             'articles' => [
                 'total' => Article::count(),
+                'active' => Article::where('is_active', true)->count(),
             ],
             'businesses' => [
                 'total' => Business::count(),
+                'active' => Business::where('is_active', true)->count(),
             ],
             'members' => [
                 'total' => Member::count(),

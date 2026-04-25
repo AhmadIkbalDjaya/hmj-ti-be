@@ -806,12 +806,21 @@
                                                     "x-stoplight": {
                                                         "id": "9yti6igd8lzza"
                                                     },
-                                                    "required": ["total"],
+                                                    "required": [
+                                                        "total",
+                                                        "active"
+                                                    ],
                                                     "properties": {
                                                         "total": {
                                                             "type": "integer",
                                                             "x-stoplight": {
                                                                 "id": "65f0dm7x8fq8j"
+                                                            }
+                                                        },
+                                                        "active": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "25x6v0o6l20v7"
                                                             }
                                                         }
                                                     }
@@ -821,12 +830,21 @@
                                                     "x-stoplight": {
                                                         "id": "avnchdazxtgdo"
                                                     },
-                                                    "required": ["total"],
+                                                    "required": [
+                                                        "total",
+                                                        "active"
+                                                    ],
                                                     "properties": {
                                                         "total": {
                                                             "type": "integer",
                                                             "x-stoplight": {
                                                                 "id": "f85397l4z5ujw"
+                                                            }
+                                                        },
+                                                        "active": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "6qsr8sgaz3q1b"
                                                             }
                                                         }
                                                     }

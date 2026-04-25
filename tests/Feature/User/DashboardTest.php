@@ -36,7 +36,9 @@ class DashboardTest extends TestCase
     public function test_get_dashboard_summary_success(): void
     {
         Article::factory()->count(3)->create();
+        Article::factory()->inactive()->count(3)->create();
         Business::factory()->count(2)->create();
+        Business::factory()->inactive()->count(2)->create();
         Member::factory()->count(5)->create();
         Complaint::factory()->count(1)->create();
 
@@ -45,8 +47,10 @@ class DashboardTest extends TestCase
         $response->assertValidRequest();
         $response->assertValidResponse(200);
 
-        $response->assertJsonPath('data.articles.total', 3);
-        $response->assertJsonPath('data.businesses.total', 2);
+        $response->assertJsonPath('data.articles.total', 6);
+        $response->assertJsonPath('data.articles.active', 3);
+        $response->assertJsonPath('data.businesses.total', 4);
+        $response->assertJsonPath('data.businesses.active', 2);
         $response->assertJsonPath('data.members.total', 5);
         $response->assertJsonPath('data.complaints.total', 1);
     }
