@@ -277,9 +277,9 @@
                 "security": []
             }
         },
-        "/business": {
+        "/businesses": {
             "get": {
-                "summary": "Get Business",
+                "summary": "Get Businesses",
                 "tags": ["Public"],
                 "responses": {
                     "200": {
@@ -395,7 +395,8 @@
                     }
                 ],
                 "security": []
-            }
+            },
+            "parameters": []
         },
         "/complaints": {
             "post": {

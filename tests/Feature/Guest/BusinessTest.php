@@ -11,7 +11,7 @@ class BusinessTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $base_url = '/api/business';
+    protected $base_url = '/api/businesses';
 
     protected function setUp(): void
     {
