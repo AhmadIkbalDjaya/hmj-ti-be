@@ -18,13 +18,13 @@ class OrganizationalStructureResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'parent_id' => $this->parent_id,
-            'level' => (string) $this->level,
-            'order_index' => (string) $this->order_index,
-            'members' => $this->members->map(fn ($member) => [
+            'level' => (int) $this->level,
+            'order_index' => (int) $this->order_index,
+            'assigned_members' => $this->members->map(fn ($member) => [
                 'id' => $member->id,
                 'name' => $member->name,
                 'photo' => $member->photo_url,
+                'position' => $this->name,
             ]),
             'children' => OrganizationalStructureResource::collection($this->children),
         ];

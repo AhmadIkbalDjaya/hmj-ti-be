@@ -33,7 +33,9 @@ class PositionController extends Controller
             )
             ->when(! is_null($level), fn ($query) => $query->where('level', $level)
             )
-            ->latest()
+            // ->latest()
+            ->orderBy('level', 'asc')
+            ->orderBy('order_index', 'asc')
             ->paginate($limit, ['*'], 'page', $page);
 
         $data = PositionResource::collection($positions);

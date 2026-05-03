@@ -107,7 +107,7 @@ class OrganizationalStructureTest extends TestCase
         $response->assertValidRequest();
         $response->assertValidResponse(200);
 
-        $response->assertJsonCount(3, 'data.0.members');
+        $response->assertJsonCount(3, 'data.0.assigned_members');
     }
 
     public function test_get_organizational_structure_excludes_inactive_children(): void

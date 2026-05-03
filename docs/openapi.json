@@ -488,48 +488,48 @@
                                         "data": {
                                             "type": "array",
                                             "x-stoplight": {
-                                                "id": "hadbctzosh5lj"
+                                                "id": "g7su0ar3ek670"
                                             },
                                             "items": {
                                                 "x-stoplight": {
-                                                    "id": "mzrr5aurwg5lr"
+                                                    "id": "r1r04ut5ys1ox"
                                                 },
                                                 "allOf": [
                                                     {
-                                                        "$ref": "#/components/schemas/OrganizationalStructure",
+                                                        "$ref": "#/components/schemas/OrganizationlStructure",
                                                         "x-stoplight": {
-                                                            "id": "5pcbyvjbvh9lu"
+                                                            "id": "afvki95kg6tfb"
                                                         }
                                                     },
                                                     {
                                                         "type": "object",
                                                         "x-stoplight": {
-                                                            "id": "dxujf7t3105hv"
+                                                            "id": "rnr8gfluo6odg"
                                                         },
                                                         "required": [
                                                             "children"
                                                         ],
                                                         "properties": {
                                                             "children": {
-                                                                "x-stoplight": {
-                                                                    "id": "p31ldnw7pc97e"
-                                                                },
                                                                 "type": "array",
+                                                                "x-stoplight": {
+                                                                    "id": "skt3el9cpkysl"
+                                                                },
                                                                 "items": {
                                                                     "x-stoplight": {
-                                                                        "id": "761o8woty8vcx"
+                                                                        "id": "l0mv0qncccxl7"
                                                                     },
                                                                     "allOf": [
                                                                         {
-                                                                            "$ref": "#/components/schemas/OrganizationalStructure",
+                                                                            "$ref": "#/components/schemas/OrganizationlStructure",
                                                                             "x-stoplight": {
-                                                                                "id": "f1brarj9b7hmu"
+                                                                                "id": "yen7llroz911u"
                                                                             }
                                                                         },
                                                                         {
                                                                             "type": "object",
                                                                             "x-stoplight": {
-                                                                                "id": "041sk2l00mllg"
+                                                                                "id": "4q5op5ktwjp58"
                                                                             },
                                                                             "required": [
                                                                                 "children"
@@ -538,33 +538,34 @@
                                                                                 "children": {
                                                                                     "type": "array",
                                                                                     "x-stoplight": {
-                                                                                        "id": "9sn7prnq0o7y2"
+                                                                                        "id": "gre3x5msb1qxi"
                                                                                     },
                                                                                     "items": {
                                                                                         "x-stoplight": {
-                                                                                            "id": "49sxoyzktmp2q"
+                                                                                            "id": "15y4kfrx9pdp3"
                                                                                         },
                                                                                         "allOf": [
                                                                                             {
-                                                                                                "$ref": "#/components/schemas/OrganizationalStructure",
+                                                                                                "$ref": "#/components/schemas/OrganizationlStructure",
                                                                                                 "x-stoplight": {
-                                                                                                    "id": "0joon73tv536k"
+                                                                                                    "id": "zxgcelsts37uo"
                                                                                                 }
                                                                                             },
                                                                                             {
                                                                                                 "type": "object",
                                                                                                 "x-stoplight": {
-                                                                                                    "id": "94exxmazqw6nh"
+                                                                                                    "id": "9zsv6yxn1bn92"
                                                                                                 },
                                                                                                 "required": [
                                                                                                     "children"
                                                                                                 ],
                                                                                                 "properties": {
                                                                                                     "children": {
-                                                                                                        "type": "string",
+                                                                                                        "type": "array",
                                                                                                         "x-stoplight": {
-                                                                                                            "id": "0l2pxns7yeesd"
-                                                                                                        }
+                                                                                                            "id": "p5apdvf69rdcp"
+                                                                                                        },
+                                                                                                        "items": {}
                                                                                                     }
                                                                                                 }
                                                                                             }
@@ -3017,7 +3018,7 @@
                     }
                 }
             },
-            "OrganizationalStructure": {
+            "OrganizationlStructure": {
                 "title": "OrganizationalStructure",
                 "x-stoplight": {
                     "id": "uullnmp0vjqiu"
@@ -3027,10 +3028,9 @@
                     "id",
                     "name",
                     "slug",
-                    "parent_id",
                     "level",
                     "order_index",
-                    "members"
+                    "assigned_members"
                 ],
                 "properties": {
                     "id": {
@@ -3051,52 +3051,52 @@
                             "id": "y3vpat8sqha8m"
                         }
                     },
-                    "parent_id": {
-                        "type": ["integer", "null"],
-                        "x-stoplight": {
-                            "id": "wfwvqpjk2c7eg"
-                        }
-                    },
                     "level": {
-                        "type": "string",
+                        "type": "integer",
                         "x-stoplight": {
                             "id": "i2y9hcc1xf3ty"
                         }
                     },
                     "order_index": {
-                        "type": "string",
+                        "type": "integer",
                         "x-stoplight": {
-                            "id": "m3w27kt1z9k8k"
+                            "id": "kc66jb6tpe70t"
                         }
                     },
-                    "members": {
+                    "assigned_members": {
                         "type": "array",
                         "x-stoplight": {
-                            "id": "20iuls1xickti"
+                            "id": "ffdcbzod1pq2u"
                         },
                         "items": {
                             "x-stoplight": {
-                                "id": "ehel4uz8hkbce"
+                                "id": "4yr34puf0cl0a"
                             },
                             "type": "object",
-                            "required": ["id", "name", "photo"],
+                            "required": ["id", "name", "photo", "position"],
                             "properties": {
                                 "id": {
                                     "type": "integer",
                                     "x-stoplight": {
-                                        "id": "5view8lnantsm"
+                                        "id": "058eqt33ui5dp"
                                     }
                                 },
                                 "name": {
                                     "type": "string",
                                     "x-stoplight": {
-                                        "id": "fjmgawwn8ix6l"
+                                        "id": "ovbldsfixhz7o"
                                     }
                                 },
                                 "photo": {
                                     "type": ["string", "null"],
                                     "x-stoplight": {
-                                        "id": "fd9pidvj0dypb"
+                                        "id": "81wvwlaave3em"
+                                    }
+                                },
+                                "position": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "dj52znh9bsz0o"
                                     }
                                 }
                             }
