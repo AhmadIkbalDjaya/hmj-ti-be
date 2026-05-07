@@ -18,6 +18,7 @@ Route::prefix('user')->group(function () {
     });
 
     Route::middleware(['auth:sanctum'])->group(function () {
+        Route::delete('articles/bulk-destroy', [ArticleController::class, 'bulkDestroy']);
         Route::resource('articles', ArticleController::class)->except(['create', 'edit']);
         Route::resource('businesses', BusinessController::class)->except(['create', 'edit']);
         Route::resource('complaints', ComplaintController::class)->only(['index', 'show', 'destroy']);

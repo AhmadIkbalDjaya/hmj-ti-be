@@ -23,4 +23,9 @@ class Business extends Model
             get: fn () => $this->image ? asset("storage/{$this->image}") : null,
         );
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
 }

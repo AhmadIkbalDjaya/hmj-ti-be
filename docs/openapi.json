@@ -1402,6 +1402,157 @@
                 ]
             }
         },
+        "/user/articles/bulk-destroy": {
+            "delete": {
+                "summary": "Bulk Delete Article",
+                "tags": ["Admin"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": ["message", "data"],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "rdz9smb5ulolg"
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "x-stoplight": {
+                                                "id": "gjurcz4phi7q6"
+                                            },
+                                            "required": [
+                                                "deleted_count",
+                                                "failed_count"
+                                            ],
+                                            "properties": {
+                                                "deleted_count": {
+                                                    "type": "integer",
+                                                    "x-stoplight": {
+                                                        "id": "k9fzrk4wmfndm"
+                                                    }
+                                                },
+                                                "failed_count": {
+                                                    "type": "integer",
+                                                    "x-stoplight": {
+                                                        "id": "bedhdavta6yid"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/400"
+                    }
+                },
+                "operationId": "get-user-articles-bulk-destroy",
+                "x-stoplight": {
+                    "id": "h9rv6yi891qkn"
+                },
+                "description": "Delete multiple Article",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "anyOf": [
+                                    {
+                                        "x-stoplight": {
+                                            "id": "jzop41phk4xr9"
+                                        },
+                                        "required": ["ids"],
+                                        "properties": {
+                                            "ids": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                    "id": "vf4o4s70tlsqt"
+                                                },
+                                                "items": {
+                                                    "x-stoplight": {
+                                                        "id": "z4p1yh75m6akm"
+                                                    },
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "x-stoplight": {
+                                            "id": "jrifpylxe8tmb"
+                                        },
+                                        "required": ["select_all"],
+                                        "properties": {
+                                            "select_all": {
+                                                "type": "boolean",
+                                                "x-stoplight": {
+                                                    "id": "anxr6ltfkapyg"
+                                                }
+                                            },
+                                            "exclude_ids": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                    "id": "hi7z4nntb8x3x"
+                                                },
+                                                "items": {
+                                                    "x-stoplight": {
+                                                        "id": "zari0puxmj1g4"
+                                                    },
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "filters": {
+                                                "type": "object",
+                                                "x-stoplight": {
+                                                    "id": "dzeah2buecjlo"
+                                                },
+                                                "properties": {
+                                                    "search": {
+                                                        "type": "string",
+                                                        "x-stoplight": {
+                                                            "id": "smzfm75u820di"
+                                                        }
+                                                    },
+                                                    "is_active": {
+                                                        "type": "boolean",
+                                                        "x-stoplight": {
+                                                            "id": "xtmhngwipmuq2"
+                                                        }
+                                                    },
+                                                    "is_featured": {
+                                                        "type": "boolean",
+                                                        "x-stoplight": {
+                                                            "id": "mofbc2gohlc5c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/user/businesses": {
             "get": {
                 "summary": "Get Businesses",

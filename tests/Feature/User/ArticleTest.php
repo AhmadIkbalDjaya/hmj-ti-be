@@ -476,4 +476,95 @@ class ArticleTest extends TestCase
         $response->assertValidRequest();
         $response->assertValidResponse(404);
     }
+
+    // -------------------------------------------------------------------------
+    // Bulk Destroy Article
+    // -------------------------------------------------------------------------
+
+    public function test_bulk_destroy_articles_by_ids_success(): void
+    {
+        $articles = Article::factory()->count(3)->create();
+        $ids = $articles->pluck('id')->toArray();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => $ids,
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 3);
+        foreach ($ids as $id) {
+            $this->assertDatabaseMissing('articles', ['id' => $id]);
+        }
+    }
+
+    public function test_bulk_destroy_articles_select_all_success(): void
+    {
+        Article::factory()->count(5)->create();
+        $exclude_article = Article::factory()->create();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'exclude_ids' => [$exclude_article->id],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 5);
+        $this->assertDatabaseHas('articles', ['id' => $exclude_article->id]);
+        $this->assertEquals(1, Article::count());
+    }
+
+    public function test_bulk_destroy_articles_select_all_with_filters_success(): void
+    {
+        Article::factory()->count(3)->create(['is_active' => true]);
+        Article::factory()->count(2)->create(['is_active' => false]);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'filters' => [
+                    'is_active' => true,
+                ],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 3);
+        $this->assertEquals(2, Article::count());
+        $this->assertEquals(0, Article::where('is_active', true)->count());
+    }
+
+    public function test_bulk_destroy_articles_unauthenticated(): void
+    {
+        $response = $this->deleteJson("{$this->base_url}/bulk-destroy", [
+            'ids' => [1, 2, 3],
+        ]);
+
+        $response->assertValidResponse(401);
+    }
+
+    public function test_bulk_destroy_articles_validation_fails(): void
+    {
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => [999], // Non-existent ID
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids.0']);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                // No ids or select_all
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids']);
+    }
 }

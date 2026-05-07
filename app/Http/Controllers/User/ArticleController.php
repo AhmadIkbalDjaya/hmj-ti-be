@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
+use App\Http\Requests\User\BulkDestroyArticleRequest;
 use App\Http\Requests\User\StoreArticleRequest;
 use App\Http\Requests\User\UpdateArticleRequest;
 use App\Http\Resources\MetaPaginateResource;
@@ -32,10 +33,8 @@ class ArticleController extends Controller
                 ->orWhere('content', 'LIKE', "%$search%")
             )
             )
-            ->when($is_active, fn ($query) => $query->where('is_active', $is_active)
-            )
-            ->when($is_featured, fn ($query) => $query->where('is_featured', $is_featured)
-            )
+            ->when($is_active, fn ($query) => $query->active())
+            ->when($is_featured, fn ($query) => $query->featured())
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 
@@ -94,6 +93,58 @@ class ArticleController extends Controller
             $article->delete();
 
             return $this->respondSuccess();
+        } catch (\Throwable $th) {
+            return $this->respondServerError($th);
+        }
+    }
+
+    public function bulkDestroy(BulkDestroyArticleRequest $request): JsonResponse
+    {
+        try {
+            $deleted_count = 0;
+            $failed_count = 0;
+
+            if ($request->boolean('select_all')) {
+                $exclude_ids = $request->input('exclude_ids', []);
+                $filters = $request->input('filters', []);
+
+                $query = Article::query()
+                    ->when(isset($filters['search']), function ($query) use ($filters) {
+                        $search = $filters['search'];
+
+                        return $query->where(function ($query) use ($search) {
+                            $query->where('title', 'LIKE', "%$search%")
+                                ->orWhere('content', 'LIKE', "%$search%");
+                        });
+                    })
+                    ->when(isset($filters['is_active']), fn ($query) => $query->active())
+                    ->when(isset($filters['is_featured']), fn ($query) => $query->featured())
+                    ->whereNotIn('id', $exclude_ids);
+
+                $articles = $query->get();
+            } else {
+                $ids = $request->input('ids', []);
+                $articles = Article::whereIn('id', $ids)->get();
+            }
+
+            foreach ($articles as $article) {
+                try {
+                    if ($article->image && Storage::exists($article->image)) {
+                        Storage::delete($article->image);
+                    }
+                    $article->delete();
+                    $deleted_count++;
+                } catch (\Throwable $th) {
+                    $failed_count++;
+                }
+            }
+
+            $message = "$deleted_count artikel berhasil dihapus.";
+
+            return $this->respondSuccess([
+                'deleted_count' => $deleted_count,
+                'failed_count' => $failed_count,
+            ], $message);
         } catch (\Throwable $th) {
             return $this->respondServerError($th);
         }
