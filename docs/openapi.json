@@ -1927,6 +1927,117 @@
                 ]
             }
         },
+        "/user/businesses/bulk-destroy": {
+            "delete": {
+                "summary": "Bulk Delete Business",
+                "tags": ["Admin"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": ["message", "data"],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "required": [
+                                                "deleted_count",
+                                                "failed_count"
+                                            ],
+                                            "properties": {
+                                                "deleted_count": {
+                                                    "type": "integer"
+                                                },
+                                                "failed_count": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "get-user-businesses-bulk-destroy",
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
+                "description": "Delete multiple Business",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "anyOf": [
+                                    {
+                                        "x-stoplight": {
+                                            "id": "sc5ljjvxxt0sz"
+                                        },
+                                        "required": ["ids"],
+                                        "properties": {
+                                            "ids": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                    "id": "jr8iysu0tjgwa"
+                                                },
+                                                "items": {
+                                                    "x-stoplight": {
+                                                        "id": "7i95n8eq3253u"
+                                                    },
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "required": ["select_all"],
+                                        "properties": {
+                                            "select_all": {
+                                                "type": "boolean"
+                                            },
+                                            "exclude_ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "filters": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "search": {
+                                                        "type": "string"
+                                                    },
+                                                    "is_active": {
+                                                        "type": "boolean"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/user/complaints": {
             "get": {
                 "summary": "Get Complaints",
@@ -2115,6 +2226,105 @@
                         "$ref": "#/components/parameters/accept-json"
                     }
                 ]
+            }
+        },
+        "/user/complaints/bulk-destroy": {
+            "delete": {
+                "summary": "Bulk Delete Complaint",
+                "tags": ["Admin"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": ["message", "data"],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "required": [
+                                                "deleted_count",
+                                                "failed_count"
+                                            ],
+                                            "properties": {
+                                                "deleted_count": {
+                                                    "type": "integer"
+                                                },
+                                                "failed_count": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "get-user-complaints-bulk-destroy",
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
+                "description": "Delete multiple Complaint",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "anyOf": [
+                                    {
+                                        "required": ["ids"],
+                                        "properties": {
+                                            "ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "required": ["select_all"],
+                                        "properties": {
+                                            "select_all": {
+                                                "type": "boolean"
+                                            },
+                                            "exclude_ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "filters": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "search": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
             }
         },
         "/user/positions": {
@@ -2839,6 +3049,108 @@
                         "$ref": "#/components/parameters/accept-json"
                     }
                 ]
+            }
+        },
+        "/user/members/bulk-destroy": {
+            "delete": {
+                "summary": "Bulk Delete Member",
+                "tags": ["Admin"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": ["message", "data"],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "required": [
+                                                "deleted_count",
+                                                "failed_count"
+                                            ],
+                                            "properties": {
+                                                "deleted_count": {
+                                                    "type": "integer"
+                                                },
+                                                "failed_count": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "get-user-members-bulk-destroy",
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
+                "description": "Delete multiple Member",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "anyOf": [
+                                    {
+                                        "required": ["ids"],
+                                        "properties": {
+                                            "ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "required": ["select_all"],
+                                        "properties": {
+                                            "select_all": {
+                                                "type": "boolean"
+                                            },
+                                            "exclude_ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "filters": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "search": {
+                                                        "type": "string"
+                                                    },
+                                                    "position_id": {
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
             }
         }
     },

@@ -20,9 +20,16 @@ Route::prefix('user')->group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('articles/bulk-destroy', [ArticleController::class, 'bulkDestroy']);
         Route::resource('articles', ArticleController::class)->except(['create', 'edit']);
+
+        Route::delete('businesses/bulk-destroy', [BusinessController::class, 'bulkDestroy']);
         Route::resource('businesses', BusinessController::class)->except(['create', 'edit']);
+
+        Route::delete('complaints/bulk-destroy', [ComplaintController::class, 'bulkDestroy']);
         Route::resource('complaints', ComplaintController::class)->only(['index', 'show', 'destroy']);
+
         Route::resource('positions', PositionController::class)->except(['create', 'edit']);
+
+        Route::delete('members/bulk-destroy', [MemberController::class, 'bulkDestroy']);
         Route::resource('members', MemberController::class)->except(['create', 'edit']);
     });
 });

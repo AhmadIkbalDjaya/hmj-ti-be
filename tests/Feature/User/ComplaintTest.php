@@ -150,4 +150,55 @@ class ComplaintTest extends TestCase
         $response->assertValidRequest();
         $response->assertValidResponse(404);
     }
+
+    // -------------------------------------------------------------------------
+    // Bulk Destroy Complaint
+    // -------------------------------------------------------------------------
+
+    public function test_bulk_destroy_complaints_by_ids_success(): void
+    {
+        $complaints = Complaint::factory()->count(3)->create();
+        $ids = $complaints->pluck('id')->toArray();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => $ids,
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 3);
+        foreach ($ids as $id) {
+            $this->assertDatabaseMissing('complaints', ['id' => $id]);
+        }
+    }
+
+    public function test_bulk_destroy_complaints_select_all_success(): void
+    {
+        Complaint::factory()->count(5)->create();
+        $exclude_complaint = Complaint::factory()->create();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'exclude_ids' => [$exclude_complaint->id],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 5);
+        $this->assertDatabaseHas('complaints', ['id' => $exclude_complaint->id]);
+        $this->assertEquals(1, Complaint::count());
+    }
+
+    public function test_bulk_destroy_complaints_unauthenticated(): void
+    {
+        $response = $this->deleteJson("{$this->base_url}/bulk-destroy", [
+            'ids' => [1, 2, 3],
+        ]);
+
+        $response->assertValidResponse(401);
+    }
 }

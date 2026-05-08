@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
+use App\Http\Requests\User\BulkDestroyComplaintRequest;
 use App\Http\Resources\MetaPaginateResource;
 use App\Http\Resources\User\ComplaintDetailResource;
 use App\Http\Resources\User\ComplaintResource;
@@ -47,6 +48,53 @@ class ComplaintController extends Controller
             $complaint->delete();
 
             return $this->respondSuccess();
+        } catch (\Throwable $th) {
+            return $this->respondServerError($th);
+        }
+    }
+
+    public function bulkDestroy(BulkDestroyComplaintRequest $request): JsonResponse
+    {
+        try {
+            $deleted_count = 0;
+            $failed_count = 0;
+
+            if ($request->boolean('select_all')) {
+                $exclude_ids = $request->input('exclude_ids', []);
+                $filters = $request->input('filters', []);
+
+                $query = Complaint::query()
+                    ->when(isset($filters['search']), function ($query) use ($filters) {
+                        $search = $filters['search'];
+
+                        return $query->where(function ($query) use ($search) {
+                            $query->where('name', 'LIKE', "%$search%")
+                                ->orWhere('description', 'LIKE', "%$search%");
+                        });
+                    })
+                    ->whereNotIn('id', $exclude_ids);
+
+                $complaints = $query->get();
+            } else {
+                $ids = $request->input('ids', []);
+                $complaints = Complaint::whereIn('id', $ids)->get();
+            }
+
+            foreach ($complaints as $complaint) {
+                try {
+                    $complaint->delete();
+                    $deleted_count++;
+                } catch (\Throwable $th) {
+                    $failed_count++;
+                }
+            }
+
+            $message = "$deleted_count pengaduan berhasil dihapus.";
+
+            return $this->respondSuccess([
+                'deleted_count' => $deleted_count,
+                'failed_count' => $failed_count,
+            ], $message);
         } catch (\Throwable $th) {
             return $this->respondServerError($th);
         }

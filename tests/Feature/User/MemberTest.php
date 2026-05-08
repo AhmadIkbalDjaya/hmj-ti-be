@@ -399,4 +399,55 @@ class MemberTest extends TestCase
         $response->assertValidRequest();
         $response->assertValidResponse(404);
     }
+
+    // -------------------------------------------------------------------------
+    // Bulk Destroy Member
+    // -------------------------------------------------------------------------
+
+    public function test_bulk_destroy_members_by_ids_success(): void
+    {
+        $members = Member::factory()->count(3)->create();
+        $ids = $members->pluck('id')->toArray();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => $ids,
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 3);
+        foreach ($ids as $id) {
+            $this->assertDatabaseMissing('members', ['id' => $id]);
+        }
+    }
+
+    public function test_bulk_destroy_members_select_all_success(): void
+    {
+        Member::factory()->count(5)->create();
+        $exclude_member = Member::factory()->create();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'exclude_ids' => [$exclude_member->id],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 5);
+        $this->assertDatabaseHas('members', ['id' => $exclude_member->id]);
+        $this->assertEquals(1, Member::count());
+    }
+
+    public function test_bulk_destroy_members_unauthenticated(): void
+    {
+        $response = $this->deleteJson("{$this->base_url}/bulk-destroy", [
+            'ids' => [1, 2, 3],
+        ]);
+
+        $response->assertValidResponse(401);
+    }
 }

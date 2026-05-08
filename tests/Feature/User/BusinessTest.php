@@ -447,4 +447,55 @@ class BusinessTest extends TestCase
         $response->assertValidRequest();
         $response->assertValidResponse(404);
     }
+
+    // -------------------------------------------------------------------------
+    // Bulk Destroy Business
+    // -------------------------------------------------------------------------
+
+    public function test_bulk_destroy_businesses_by_ids_success(): void
+    {
+        $businesses = Business::factory()->count(3)->create();
+        $ids = $businesses->pluck('id')->toArray();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => $ids,
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 3);
+        foreach ($ids as $id) {
+            $this->assertDatabaseMissing('businesses', ['id' => $id]);
+        }
+    }
+
+    public function test_bulk_destroy_businesses_select_all_success(): void
+    {
+        Business::factory()->count(5)->create();
+        $exclude_business = Business::factory()->create();
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'exclude_ids' => [$exclude_business->id],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 5);
+        $this->assertDatabaseHas('businesses', ['id' => $exclude_business->id]);
+        $this->assertEquals(1, Business::count());
+    }
+
+    public function test_bulk_destroy_businesses_unauthenticated(): void
+    {
+        $response = $this->deleteJson("{$this->base_url}/bulk-destroy", [
+            'ids' => [1, 2, 3],
+        ]);
+
+        $response->assertValidResponse(401);
+    }
 }

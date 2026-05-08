@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
+use App\Http\Requests\User\BulkDestroyBusinessRequest;
 use App\Http\Requests\User\StoreBusinessRequest;
 use App\Http\Requests\User\UpdateBusinessRequest;
 use App\Http\Resources\MetaPaginateResource;
@@ -91,6 +92,59 @@ class BusinessController extends Controller
             $business->delete();
 
             return $this->respondSuccess();
+        } catch (\Throwable $th) {
+            return $this->respondServerError($th);
+        }
+    }
+
+    public function bulkDestroy(BulkDestroyBusinessRequest $request): JsonResponse
+    {
+        try {
+            $deleted_count = 0;
+            $failed_count = 0;
+
+            if ($request->boolean('select_all')) {
+                $exclude_ids = $request->input('exclude_ids', []);
+                $filters = $request->input('filters', []);
+
+                $query = Business::query()
+                    ->when(isset($filters['search']), function ($query) use ($filters) {
+                        $search = $filters['search'];
+
+                        return $query->where(function ($query) use ($search) {
+                            $query->where('title', 'LIKE', "%$search%")
+                                ->orWhere('description', 'LIKE', "%$search%");
+                        });
+                    })
+                    ->when(isset($filters['is_active']), function ($query) use ($filters) {
+                        return $query->where('is_active', $filters['is_active']);
+                    })
+                    ->whereNotIn('id', $exclude_ids);
+
+                $businesses = $query->get();
+            } else {
+                $ids = $request->input('ids', []);
+                $businesses = Business::whereIn('id', $ids)->get();
+            }
+
+            foreach ($businesses as $business) {
+                try {
+                    if ($business->image && Storage::exists($business->image)) {
+                        Storage::delete($business->image);
+                    }
+                    $business->delete();
+                    $deleted_count++;
+                } catch (\Throwable $th) {
+                    $failed_count++;
+                }
+            }
+
+            $message = "$deleted_count bisnis berhasil dihapus.";
+
+            return $this->respondSuccess([
+                'deleted_count' => $deleted_count,
+                'failed_count' => $failed_count,
+            ], $message);
         } catch (\Throwable $th) {
             return $this->respondServerError($th);
         }

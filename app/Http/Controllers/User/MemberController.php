@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
+use App\Http\Requests\User\BulkDestroyMemberRequest;
 use App\Http\Requests\User\StoreMemberRequest;
 use App\Http\Requests\User\UpdateMemberRequest;
 use App\Http\Resources\MetaPaginateResource;
@@ -94,6 +95,54 @@ class MemberController extends Controller
             $member->delete();
 
             return $this->respondSuccess();
+        } catch (\Throwable $th) {
+            return $this->respondServerError($th);
+        }
+    }
+
+    public function bulkDestroy(BulkDestroyMemberRequest $request): JsonResponse
+    {
+        try {
+            $deleted_count = 0;
+            $failed_count = 0;
+
+            if ($request->boolean('select_all')) {
+                $exclude_ids = $request->input('exclude_ids', []);
+                $filters = $request->input('filters', []);
+
+                $query = Member::query()
+                    ->when(isset($filters['search']), function ($query) use ($filters) {
+                        $search = $filters['search'];
+
+                        return $query->where('name', 'LIKE', "%$search%");
+                    })
+                    ->when(isset($filters['position_id']), function ($query) use ($filters) {
+                        return $query->where('position_id', $filters['position_id']);
+                    })
+                    ->whereNotIn('id', $exclude_ids);
+
+                $members = $query->get();
+            } else {
+                $ids = $request->input('ids', []);
+                $members = Member::whereIn('id', $ids)->get();
+            }
+
+            foreach ($members as $member) {
+                try {
+                    if ($member->photo && Storage::exists($member->photo)) {
+                        Storage::delete($member->photo);
+                    }
+                    $member->delete();
+                    $deleted_count++;
+                } catch (\Throwable $th) {
+                    $failed_count++;
+                }
+            }
+
+            return $this->respondSuccess([
+                'deleted_count' => $deleted_count,
+                'failed_count' => $failed_count,
+            ], "$deleted_count anggota berhasil dihapus.");
         } catch (\Throwable $th) {
             return $this->respondServerError($th);
         }

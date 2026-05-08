@@ -17,7 +17,7 @@ class OldDataSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->seedArticles();
+        $this->seedArticles();
         $this->seedBusinesses();
     }
 

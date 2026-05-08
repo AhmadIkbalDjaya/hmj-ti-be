@@ -117,8 +117,12 @@ class ArticleController extends Controller
                                 ->orWhere('content', 'LIKE', "%$search%");
                         });
                     })
-                    ->when(isset($filters['is_active']), fn ($query) => $query->active())
-                    ->when(isset($filters['is_featured']), fn ($query) => $query->featured())
+                    ->when(isset($filters['is_active']), function ($query) use ($filters) {
+                        return $query->where('is_active', $filters['is_active']);
+                    })
+                    ->when(isset($filters['is_featured']), function ($query) use ($filters) {
+                        return $query->where('is_featured', $filters['is_featured']);
+                    })
                     ->whereNotIn('id', $exclude_ids);
 
                 $articles = $query->get();
