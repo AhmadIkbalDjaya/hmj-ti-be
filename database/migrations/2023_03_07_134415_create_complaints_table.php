@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('institute')->nullable();
             $table->longText('description');
+
+            $table->boolean('is_read')->default(false);
+            $table->timestamp('read_at')->nullable();
+
             $table->timestamps();
         });
     }

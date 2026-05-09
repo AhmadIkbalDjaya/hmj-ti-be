@@ -415,7 +415,7 @@
                                             "type": "string"
                                         },
                                         "data": {
-                                            "$ref": "#/components/schemas/ComplaintDetail"
+                                            "$ref": "#/components/schemas/ComplaintDetailGuest"
                                         }
                                     }
                                 }
@@ -871,12 +871,21 @@
                                                     "x-stoplight": {
                                                         "id": "yb0c0lq4ex2ik"
                                                     },
-                                                    "required": ["total"],
+                                                    "required": [
+                                                        "total",
+                                                        "unread"
+                                                    ],
                                                     "properties": {
                                                         "total": {
                                                             "type": "integer",
                                                             "x-stoplight": {
                                                                 "id": "9xcssyiiuwzd3"
+                                                            }
+                                                        },
+                                                        "unread": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "hn4a56gkgrlww"
                                                             }
                                                         }
                                                     }
@@ -2061,7 +2070,8 @@
                                                 "required": [
                                                     "id",
                                                     "name",
-                                                    "description"
+                                                    "description",
+                                                    "is_read"
                                                 ],
                                                 "properties": {
                                                     "id": {
@@ -2071,16 +2081,31 @@
                                                         "type": "string"
                                                     },
                                                     "email": {
-                                                        "type": "string"
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "phone": {
-                                                        "type": "string"
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "institute": {
-                                                        "type": "string"
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "description": {
                                                         "type": "string"
+                                                    },
+                                                    "is_read": {
+                                                        "type": "boolean",
+                                                        "x-stoplight": {
+                                                            "id": "70wtn2uc6x2e7"
+                                                        }
                                                     }
                                                 }
                                             }
@@ -2321,6 +2346,85 @@
                                     }
                                 ],
                                 "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/complaints/{id}/toggle-read": {
+            "parameters": [
+                {
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "complaint id"
+                }
+            ],
+            "patch": {
+                "summary": "Toggle Read Complaint",
+                "tags": ["Admin"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": ["message", "data"],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "7se8i2dl9sxx1"
+                                            }
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/ComplaintDetail",
+                                            "x-stoplight": {
+                                                "id": "1jhff1fmo5hvg"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "patch-users-complaints-id-toggle-read",
+                "x-stoplight": {
+                    "id": "tu9j8s7bftqa1"
+                },
+                "description": "Toggle complaint read status",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["is_read"],
+                                "properties": {
+                                    "is_read": {
+                                        "type": "boolean",
+                                        "x-stoplight": {
+                                            "id": "e4r2f7o62a6j2"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -3350,6 +3454,69 @@
                 "required": [
                     "id",
                     "name",
+                    "email",
+                    "phone",
+                    "institute",
+                    "description",
+                    "is_read",
+                    "read_at",
+                    "created_at",
+                    "updated_at"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": ["string", "null"]
+                    },
+                    "phone": {
+                        "type": ["string", "null"]
+                    },
+                    "institute": {
+                        "type": ["string", "null"]
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "is_read": {
+                        "type": "boolean",
+                        "x-stoplight": {
+                            "id": "gy0qvp1gsq01g"
+                        }
+                    },
+                    "read_at": {
+                        "type": ["string", "null"],
+                        "x-stoplight": {
+                            "id": "28yvps6tpinqx"
+                        },
+                        "format": "date-time"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "ComplaintDetailGuest": {
+                "title": "ComplaintDetailGuest",
+                "x-stoplight": {
+                    "id": "xehkzfbzaw72j"
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "phone",
+                    "institute",
                     "description",
                     "created_at",
                     "updated_at"
@@ -3362,13 +3529,13 @@
                         "type": "string"
                     },
                     "email": {
-                        "type": "string"
+                        "type": ["string", "null"]
                     },
                     "phone": {
-                        "type": "string"
+                        "type": ["string", "null"]
                     },
                     "institute": {
-                        "type": "string"
+                        "type": ["string", "null"]
                     },
                     "description": {
                         "type": "string"

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
 use App\Http\Requests\User\BulkDestroyComplaintRequest;
+use App\Http\Requests\User\ToggleReadComplaintRequest;
 use App\Http\Resources\MetaPaginateResource;
 use App\Http\Resources\User\ComplaintDetailResource;
 use App\Http\Resources\User\ComplaintResource;
@@ -23,7 +24,7 @@ class ComplaintController extends Controller
         $search = $request->input('search', '');
 
         $complaints = Complaint::query()
-            ->select(['id', 'name', 'email', 'phone', 'institute', 'description'])
+            ->select(['id', 'name', 'email', 'phone', 'institute', 'description', 'is_read'])
             ->when($search, fn ($query) => $query->where(fn ($query) => $query->where('name', 'LIKE', "%$search%")
                 ->orWhere('description', 'LIKE', "%$search%")
             )
@@ -95,6 +96,25 @@ class ComplaintController extends Controller
                 'deleted_count' => $deleted_count,
                 'failed_count' => $failed_count,
             ], $message);
+        } catch (\Throwable $th) {
+            return $this->respondServerError($th);
+        }
+    }
+
+    public function toggleRead(Complaint $complaint, ToggleReadComplaintRequest $request): JsonResponse
+    {
+        try {
+            $is_read = $request->boolean('is_read');
+
+            $complaint->update([
+                'is_read' => $is_read,
+                'read_at' => $is_read ? now() : null,
+            ]);
+
+            $baseMessage = 'Pesan ditandai sebagai';
+            $message = $is_read ? "$baseMessage telah dibaca" : "$baseMessage belum dibaca";
+
+            return $this->respondSuccess(new ComplaintDetailResource($complaint), $message);
         } catch (\Throwable $th) {
             return $this->respondServerError($th);
         }

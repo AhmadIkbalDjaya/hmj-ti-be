@@ -14,15 +14,17 @@ class ComplaintDetailResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return array_filter([
+        return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
             'institute' => $this->institute,
             'description' => $this->description,
+            'is_read' => $this->is_read,
+            'read_at' => $this->read_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ], fn ($value) => ! is_null($value));
+        ];
     }
 }

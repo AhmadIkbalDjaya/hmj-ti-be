@@ -30,6 +30,7 @@ class DashboardController extends Controller
             ],
             'complaints' => [
                 'total' => Complaint::count(),
+                'unread' => Complaint::unread()->count(),
             ],
         ];
 

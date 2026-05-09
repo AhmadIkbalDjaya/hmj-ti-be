@@ -33,6 +33,9 @@ Table complaints {
   phone varchar [null]
   institute varchar [null]
   description longtext [not null]
+
+  is_read bool [not null, default: false]
+  read_at timestamp [null, default: null]
   
   created_at timestamp
   updated_at timestamp

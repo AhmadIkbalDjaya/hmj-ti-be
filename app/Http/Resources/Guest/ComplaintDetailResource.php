@@ -14,7 +14,7 @@ class ComplaintDetailResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return array_filter([
+        return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
@@ -23,6 +23,6 @@ class ComplaintDetailResource extends JsonResource
             'description' => $this->description,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ], fn ($value) => ! is_null($value));
+        ];
     }
 }

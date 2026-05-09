@@ -14,13 +14,14 @@ class ComplaintResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return array_filter([
+        return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
             'institute' => $this->institute,
             'description' => $this->description,
-        ], fn ($value) => ! is_null($value));
+            'is_read' => $this->is_read,
+        ];
     }
 }

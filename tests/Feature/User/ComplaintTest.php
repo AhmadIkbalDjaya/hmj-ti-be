@@ -201,4 +201,69 @@ class ComplaintTest extends TestCase
 
         $response->assertValidResponse(401);
     }
+
+    // -------------------------------------------------------------------------
+    // Toggle Read Complaint
+    // -------------------------------------------------------------------------
+
+    public function test_toggle_read_complaint_success(): void
+    {
+        $complaint = Complaint::factory()->create(['is_read' => false, 'read_at' => null]);
+
+        $response = $this->withToken($this->token)
+            ->patchJson("{$this->base_url}/{$complaint->id}/toggle-read", [
+                'is_read' => true,
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $this->assertTrue($complaint->fresh()->is_read);
+        $this->assertNotNull($complaint->fresh()->read_at);
+
+        // Toggle back
+        $response = $this->withToken($this->token)
+            ->patchJson("{$this->base_url}/{$complaint->id}/toggle-read", [
+                'is_read' => false,
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $this->assertFalse($complaint->fresh()->is_read);
+        $this->assertNull($complaint->fresh()->read_at);
+    }
+
+    public function test_toggle_read_complaint_validation_error(): void
+    {
+        $complaint = Complaint::factory()->create();
+
+        $response = $this->withToken($this->token)
+            ->patchJson("{$this->base_url}/{$complaint->id}/toggle-read", [
+                'is_read' => 'not-a-boolean',
+            ]);
+
+        $response->assertValidResponse(422);
+    }
+
+    public function test_toggle_read_complaint_unauthenticated(): void
+    {
+        $complaint = Complaint::factory()->create();
+
+        $response = $this->patchJson("{$this->base_url}/{$complaint->id}/toggle-read", [
+            'is_read' => true,
+        ]);
+
+        $response->assertValidResponse(401);
+    }
+
+    public function test_toggle_read_complaint_not_found(): void
+    {
+        $response = $this->withToken($this->token)
+            ->patchJson("{$this->base_url}/999/toggle-read", [
+                'is_read' => true,
+            ]);
+
+        $response->assertValidResponse(404);
+    }
 }

@@ -40,7 +40,8 @@ class DashboardTest extends TestCase
         Business::factory()->count(2)->create();
         Business::factory()->inactive()->count(2)->create();
         Member::factory()->count(5)->create();
-        Complaint::factory()->count(1)->create();
+        Complaint::factory()->read()->count(3)->create();
+        Complaint::factory()->unread()->count(2)->create();
 
         $response = $this->withToken($this->token)->get($this->base_url);
 
@@ -52,7 +53,8 @@ class DashboardTest extends TestCase
         $response->assertJsonPath('data.businesses.total', 4);
         $response->assertJsonPath('data.businesses.active', 2);
         $response->assertJsonPath('data.members.total', 5);
-        $response->assertJsonPath('data.complaints.total', 1);
+        $response->assertJsonPath('data.complaints.total', 5);
+        $response->assertJsonPath('data.complaints.unread', 2);
     }
 
     public function test_get_dashboard_summary_with_zero_counts(): void

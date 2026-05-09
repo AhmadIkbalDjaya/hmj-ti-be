@@ -25,6 +25,7 @@ Route::prefix('user')->group(function () {
         Route::resource('businesses', BusinessController::class)->except(['create', 'edit']);
 
         Route::delete('complaints/bulk-destroy', [ComplaintController::class, 'bulkDestroy']);
+        Route::patch('complaints/{complaint}/toggle-read', [ComplaintController::class, 'toggleRead']);
         Route::resource('complaints', ComplaintController::class)->only(['index', 'show', 'destroy']);
 
         Route::resource('positions', PositionController::class)->except(['create', 'edit']);
