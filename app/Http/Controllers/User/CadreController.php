@@ -8,6 +8,7 @@ use App\Http\Requests\User\BulkDestroyCadreRequest;
 use App\Http\Requests\User\StoreCadreRequest;
 use App\Http\Requests\User\UpdateCadreRequest;
 use App\Http\Resources\MetaPaginateResource;
+use App\Http\Resources\User\CadreDetailResource;
 use App\Http\Resources\User\CadreResource;
 use App\Models\Cadre;
 use App\Traits\HttpResponses;
@@ -26,12 +27,10 @@ class CadreController extends Controller
         $status = $request->input('status', null);
 
         $cadres = Cadre::query()
-            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%")
-            )
-            ->when($batch, fn ($query) => $query->where('batch', $batch)
-            )
-            ->when($status, fn ($query) => $query->where('status', $status)
-            )
+            ->select(['id', 'name', 'batch', 'status'])
+            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
+            ->when($batch, fn ($query) => $query->where('batch', $batch))
+            ->when($status, fn ($query) => $query->where('status', $status))
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 
@@ -46,7 +45,7 @@ class CadreController extends Controller
         try {
             $new_cadre = Cadre::create($request->validated());
 
-            return $this->respondCreated(new CadreResource($new_cadre), 'Kader berhasil ditambahkan.');
+            return $this->respondCreated(new CadreDetailResource($new_cadre), 'Kader berhasil ditambahkan.');
         } catch (\Throwable $th) {
             return $this->respondServerError($th);
         }
@@ -54,7 +53,7 @@ class CadreController extends Controller
 
     public function show(Cadre $cadre): JsonResponse
     {
-        return $this->respondSuccess(new CadreResource($cadre));
+        return $this->respondSuccess(new CadreDetailResource($cadre));
     }
 
     public function update(UpdateCadreRequest $request, Cadre $cadre): JsonResponse
@@ -62,7 +61,7 @@ class CadreController extends Controller
         try {
             $cadre->update($request->validated());
 
-            return $this->respondSuccess(new CadreResource($cadre), 'Kader berhasil diperbarui.');
+            return $this->respondSuccess(new CadreDetailResource($cadre), 'Kader berhasil diperbarui.');
         } catch (\Throwable $th) {
             return $this->respondServerError($th);
         }

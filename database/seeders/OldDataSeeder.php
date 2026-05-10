@@ -152,6 +152,8 @@ class OldDataSeeder extends Seeder
                     'address' => $cadre['address'],
                     'batch' => $cadre['batch'],
                     'status' => $cadre['status'],
+                    'created_at' => $cadre['created_at'],
+                    'updated_at' => $cadre['updated_at'],
                 ]);
             }
         });
