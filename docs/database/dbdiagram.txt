@@ -65,3 +65,21 @@ Table members {
   updated_at timestamp
 }
 Ref: members.position_id < positions.id [update: cascade, delete: restrict]
+
+Enum cadre_status {
+  "active"
+  "inactive"
+  "transferred"
+  "graduated"
+}
+
+Table cadres {
+  id int PK
+  name varchar [not null]
+  address text [null]
+  batch varchar [not null]
+  status cardre_status [not null, default: "active"]
+
+  created_at timestamp
+  updated_at timestamp
+}

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Business;
+use App\Models\Cadre;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -19,6 +20,7 @@ class OldDataSeeder extends Seeder
     {
         $this->seedArticles();
         $this->seedBusinesses();
+        $this->seedCadres();
     }
 
     private function seedArticles(): void
@@ -119,6 +121,37 @@ class OldDataSeeder extends Seeder
                     'whatsapp' => $business['whatsapp'],
                     'created_at' => $business['publish_at'],
                     'updated_at' => $business['publish_at'],
+                ]);
+            }
+        });
+    }
+
+    private function seedCadres(): void
+    {
+        $jsonPath = database_path('seeders/data/cadres.json');
+
+        if (! File::exists($jsonPath)) {
+            $this->command->error("❌ Json file not found: $jsonPath");
+
+            return;
+        }
+
+        $cadres = json_decode(File::get($jsonPath), true);
+
+        if (! is_array($cadres)) {
+            $this->command->error('❌ Json format not valid');
+
+            return;
+        }
+
+        DB::transaction(function () use ($cadres) {
+            foreach ($cadres as $cadre) {
+                Cadre::create([
+                    'id' => $cadre['id'],
+                    'name' => $cadre['name'],
+                    'address' => $cadre['address'],
+                    'batch' => $cadre['batch'],
+                    'status' => $cadre['status'],
                 ]);
             }
         });

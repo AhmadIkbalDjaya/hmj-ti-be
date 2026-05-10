@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\AuthenticationController;
 use App\Http\Controllers\User\BusinessController;
+use App\Http\Controllers\User\CadreController;
 use App\Http\Controllers\User\ComplaintController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\MemberController;
@@ -32,5 +33,8 @@ Route::prefix('user')->group(function () {
 
         Route::delete('members/bulk-destroy', [MemberController::class, 'bulkDestroy']);
         Route::resource('members', MemberController::class)->except(['create', 'edit']);
+
+        Route::delete('cadres/bulk-destroy', [CadreController::class, 'bulkDestroy']);
+        Route::resource('cadres', CadreController::class)->except(['create', 'edit']);
     });
 });
