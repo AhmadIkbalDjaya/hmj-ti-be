@@ -28,10 +28,8 @@ class MemberController extends Controller
 
         $members = Member::query()
             ->select(['id', 'name', 'photo', 'position_id'])
-            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%")
-            )
-            ->when($position_id, fn ($query) => $query->where('position_id', $position_id)
-            )
+            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
+            ->when($position_id, fn ($query) => $query->where('position_id', $position_id))
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 
@@ -109,16 +107,12 @@ class MemberController extends Controller
             if ($request->boolean('select_all')) {
                 $exclude_ids = $request->input('exclude_ids', []);
                 $filters = $request->input('filters', []);
+                $search = $filters['search'] ?? '';
+                $position_id = $filters['position_id'] ?? null;
 
                 $query = Member::query()
-                    ->when(isset($filters['search']), function ($query) use ($filters) {
-                        $search = $filters['search'];
-
-                        return $query->where('name', 'LIKE', "%$search%");
-                    })
-                    ->when(isset($filters['position_id']), function ($query) use ($filters) {
-                        return $query->where('position_id', $filters['position_id']);
-                    })
+                    ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
+                    ->when($position_id, fn ($query) => $query->where('position_id', $position_id))
                     ->whereNotIn('id', $exclude_ids);
 
                 $members = $query->get();

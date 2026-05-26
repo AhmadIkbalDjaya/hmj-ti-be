@@ -498,4 +498,44 @@ class BusinessTest extends TestCase
 
         $response->assertValidResponse(401);
     }
+
+    public function test_bulk_destroy_businesses_select_all_with_filters_success(): void
+    {
+        Business::factory()->count(3)->create(['is_active' => true]);
+        Business::factory()->count(2)->create(['is_active' => false]);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'filters' => [
+                    'is_active' => true,
+                ],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 3);
+        $this->assertEquals(2, Business::count());
+        $this->assertEquals(0, Business::where('is_active', true)->count());
+    }
+
+    public function test_bulk_destroy_businesses_validation_fails(): void
+    {
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => [999], // Non-existent ID
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids.0']);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                // No ids or select_all
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids']);
+    }
 }

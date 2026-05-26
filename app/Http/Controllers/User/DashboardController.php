@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enums\CadreStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Business;
+use App\Models\Cadre;
 use App\Models\Complaint;
 use App\Models\Member;
 use App\Traits\HttpResponses;
@@ -31,6 +33,10 @@ class DashboardController extends Controller
             'complaints' => [
                 'total' => Complaint::count(),
                 'unread' => Complaint::unread()->count(),
+            ],
+            'cadres' => [
+                'total' => Cadre::count(),
+                'active' => Cadre::where('status', CadreStatus::ACTIVE)->count(),
             ],
         ];
 

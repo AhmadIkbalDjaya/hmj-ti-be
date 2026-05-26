@@ -23,12 +23,9 @@ class CadreController extends Controller
         $status = $request->input('status', null);
 
         $cadres = Cadre::query()
-            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%")
-            )
-            ->when($batch, fn ($query) => $query->where('batch', $batch)
-            )
-            ->when($status, fn ($query) => $query->where('status', $status)
-            )
+            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
+            ->when($batch, fn ($query) => $query->where('batch', $batch))
+            ->when($status, fn ($query) => $query->where('status', $status))
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 

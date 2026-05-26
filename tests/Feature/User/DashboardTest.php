@@ -4,6 +4,7 @@ namespace Tests\Feature\User;
 
 use App\Models\Article;
 use App\Models\Business;
+use App\Models\Cadre;
 use App\Models\Complaint;
 use App\Models\Member;
 use App\Models\User;
@@ -42,6 +43,8 @@ class DashboardTest extends TestCase
         Member::factory()->count(5)->create();
         Complaint::factory()->read()->count(3)->create();
         Complaint::factory()->unread()->count(2)->create();
+        Cadre::factory()->inactive()->count(10)->create();
+        Cadre::factory()->active()->count(22)->create();
 
         $response = $this->withToken($this->token)->get($this->base_url);
 
@@ -55,6 +58,8 @@ class DashboardTest extends TestCase
         $response->assertJsonPath('data.members.total', 5);
         $response->assertJsonPath('data.complaints.total', 5);
         $response->assertJsonPath('data.complaints.unread', 2);
+        $response->assertJsonPath('data.cadres.total', 32);
+        $response->assertJsonPath('data.cadres.active', 22);
     }
 
     public function test_get_dashboard_summary_with_zero_counts(): void

@@ -24,4 +24,24 @@ class CadreFactory extends Factory
             'status' => fake()->randomElement(CadreStatus::cases()),
         ];
     }
+
+    /**
+     * Indicate that the cadre is active.
+     */
+    public function active(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => CadreStatus::ACTIVE->value,
+        ]);
+    }
+
+    /**
+     * Indicate that the cadre is inactive.
+     */
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => CadreStatus::INACTIVE->value,
+        ]);
+    }
 }

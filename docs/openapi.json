@@ -391,6 +391,9 @@
                             }
                         }
                     },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -897,7 +900,8 @@
                                                 "articles",
                                                 "businesses",
                                                 "members",
-                                                "complaints"
+                                                "complaints",
+                                                "cadres"
                                             ],
                                             "properties": {
                                                 "articles": {
@@ -986,6 +990,30 @@
                                                             }
                                                         }
                                                     }
+                                                },
+                                                "cadres": {
+                                                    "type": "object",
+                                                    "x-stoplight": {
+                                                        "id": "joy06zrvogebk"
+                                                    },
+                                                    "required": [
+                                                        "total",
+                                                        "active"
+                                                    ],
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "yd0ynz97v2bh8"
+                                                            }
+                                                        },
+                                                        "active": {
+                                                            "type": "integer",
+                                                            "x-stoplight": {
+                                                                "id": "vl7qwxnjbntcm"
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -1005,7 +1033,17 @@
                 "x-stoplight": {
                     "id": "xzk6k2p8hu8g3"
                 },
-                "description": "Get data summary for dashboard"
+                "description": "Get data summary for dashboard",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
             }
         },
         "/user/articles": {
@@ -1577,6 +1615,16 @@
                     "id": "h9rv6yi891qkn"
                 },
                 "description": "Delete multiple Article",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2171,7 +2219,8 @@
                                                     "id",
                                                     "name",
                                                     "description",
-                                                    "is_read"
+                                                    "is_read",
+                                                    "created_at"
                                                 ],
                                                 "properties": {
                                                     "id": {
@@ -2206,6 +2255,13 @@
                                                         "x-stoplight": {
                                                             "id": "70wtn2uc6x2e7"
                                                         }
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "x-stoplight": {
+                                                            "id": "xakhqmkmgz39b"
+                                                        },
+                                                        "format": "date-time"
                                                     }
                                                 }
                                             }
@@ -2242,6 +2298,14 @@
                     },
                     {
                         "$ref": "#/components/parameters/search"
+                    },
+                    {
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query",
+                        "name": "is_read",
+                        "description": "Complaint read status"
                     }
                 ],
                 "security": [
@@ -2439,6 +2503,15 @@
                                                 "properties": {
                                                     "search": {
                                                         "type": "string"
+                                                    },
+                                                    "is_read": {
+                                                        "type": [
+                                                            "boolean",
+                                                            "null"
+                                                        ],
+                                                        "x-stoplight": {
+                                                            "id": "hxpc6s2uslsj3"
+                                                        }
                                                     }
                                                 }
                                             }
@@ -2511,6 +2584,16 @@
                     "id": "tu9j8s7bftqa1"
                 },
                 "description": "Toggle complaint read status",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3419,6 +3502,9 @@
                 "description": "Get list of cadre",
                 "parameters": [
                     {
+                        "$ref": "#/components/parameters/accept-json"
+                    },
+                    {
                         "$ref": "#/components/parameters/page"
                     },
                     {
@@ -3442,6 +3528,11 @@
                         "in": "query",
                         "name": "status",
                         "description": "cadre status"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
                     }
                 ]
             },
@@ -3492,6 +3583,16 @@
                     "id": "z756ngrxhlui5"
                 },
                 "description": "Create new cadre",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3582,7 +3683,16 @@
                 },
                 "operationId": "get-user-cadre-detail",
                 "description": "Get cadre detail",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
                 "x-stoplight": {
                     "id": "6eaxu53fpi22l"
                 }
@@ -3625,6 +3735,16 @@
                 },
                 "operationId": "post-user-cadre-edit",
                 "description": "Edit cadre",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3711,7 +3831,17 @@
                 "x-stoplight": {
                     "id": "hbkg44v0dj626"
                 },
-                "description": "Delete Cadre"
+                "description": "Delete Cadre",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
             }
         },
         "/user/cadres/bulk-destroy": {

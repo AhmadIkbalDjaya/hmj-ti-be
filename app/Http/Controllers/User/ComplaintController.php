@@ -22,13 +22,14 @@ class ComplaintController extends Controller
         $page = $request->input('page', 1);
         $limit = $request->input('limit', 10);
         $search = $request->input('search', '');
+        $is_read = $request->input('is_read', null);
 
         $complaints = Complaint::query()
-            ->select(['id', 'name', 'email', 'phone', 'institute', 'description', 'is_read'])
+            ->select(['id', 'name', 'email', 'phone', 'institute', 'description', 'is_read', 'created_at'])
             ->when($search, fn ($query) => $query->where(fn ($query) => $query->where('name', 'LIKE', "%$search%")
                 ->orWhere('description', 'LIKE', "%$search%")
-            )
-            )
+            ))
+            ->when(! is_null($is_read), fn ($query) => $query->where('is_read', $is_read))
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 
@@ -63,16 +64,14 @@ class ComplaintController extends Controller
             if ($request->boolean('select_all')) {
                 $exclude_ids = $request->input('exclude_ids', []);
                 $filters = $request->input('filters', []);
+                $search = $filters['search'] ?? '';
+                $is_read = $filters['is_read'] ?? null;
 
                 $query = Complaint::query()
-                    ->when(isset($filters['search']), function ($query) use ($filters) {
-                        $search = $filters['search'];
-
-                        return $query->where(function ($query) use ($search) {
-                            $query->where('name', 'LIKE', "%$search%")
-                                ->orWhere('description', 'LIKE', "%$search%");
-                        });
-                    })
+                    ->when($search, fn ($query) => $query->where(fn ($query) => $query->where('name', 'LIKE', "%$search%")
+                        ->orWhere('description', 'LIKE', "%$search%")
+                    ))
+                    ->when(! is_null($is_read), fn ($query) => $query->where('is_read', $is_read))
                     ->whereNotIn('id', $exclude_ids);
 
                 $complaints = $query->get();

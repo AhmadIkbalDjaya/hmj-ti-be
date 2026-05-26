@@ -27,13 +27,9 @@ class PositionController extends Controller
 
         $positions = Position::query()
             ->select(['id', 'name', 'slug', 'level', 'is_active'])
-            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%")
-            )
-            ->when($is_active, fn ($query) => $query->where('is_active', $is_active)
-            )
-            ->when(! is_null($level), fn ($query) => $query->where('level', $level)
-            )
-            // ->latest()
+            ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
+            ->when(! is_null($is_active), fn ($query) => $query->where('is_active', $is_active))
+            ->when(! is_null($level), fn ($query) => $query->where('level', $level))
             ->orderBy('level', 'asc')
             ->orderBy('order_index', 'asc')
             ->paginate($limit, ['*'], 'page', $page);

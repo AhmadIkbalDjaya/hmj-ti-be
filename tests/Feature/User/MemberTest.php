@@ -450,4 +450,47 @@ class MemberTest extends TestCase
 
         $response->assertValidResponse(401);
     }
+
+    public function test_bulk_destroy_members_select_all_with_filters_success(): void
+    {
+        $position1 = Position::factory()->create();
+        $position2 = Position::factory()->create();
+
+        Member::factory()->count(4)->create(['position_id' => $position1->id]);
+        Member::factory()->count(2)->create(['position_id' => $position2->id]);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'filters' => [
+                    'position_id' => $position1->id,
+                ],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 4);
+        $this->assertEquals(2, Member::count());
+        $this->assertEquals(0, Member::where('position_id', $position1->id)->count());
+    }
+
+    public function test_bulk_destroy_members_validation_fails(): void
+    {
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => [999], // Non-existent ID
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids.0']);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                // No ids or select_all
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids']);
+    }
 }

@@ -30,10 +30,8 @@ class BusinessController extends Controller
             ->select(['id', 'title', 'slug', 'price', 'is_active'])
             ->when($search, fn ($query) => $query->where(fn ($query) => $query->where('title', 'LIKE', "%$search%")
                 ->orWhere('description', 'LIKE', "%$search%")
-            )
-            )
-            ->when($is_active, fn ($query) => $query->where('is_active', $is_active)
-            )
+            ))
+            ->when(! is_null($is_active), fn ($query) => $query->where('is_active', $is_active))
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 
@@ -106,19 +104,14 @@ class BusinessController extends Controller
             if ($request->boolean('select_all')) {
                 $exclude_ids = $request->input('exclude_ids', []);
                 $filters = $request->input('filters', []);
+                $search = $filters['search'] ?? '';
+                $is_active = $filters['is_active'] ?? null;
 
                 $query = Business::query()
-                    ->when(isset($filters['search']), function ($query) use ($filters) {
-                        $search = $filters['search'];
-
-                        return $query->where(function ($query) use ($search) {
-                            $query->where('title', 'LIKE', "%$search%")
-                                ->orWhere('description', 'LIKE', "%$search%");
-                        });
-                    })
-                    ->when(isset($filters['is_active']), function ($query) use ($filters) {
-                        return $query->where('is_active', $filters['is_active']);
-                    })
+                    ->when($search, fn ($query) => $query->where(fn ($query) => $query->where('title', 'LIKE', "%$search%")
+                        ->orWhere('description', 'LIKE', "%$search%")
+                    ))
+                    ->when(! is_null($is_active), fn ($query) => $query->where('is_active', $is_active))
                     ->whereNotIn('id', $exclude_ids);
 
                 $businesses = $query->get();

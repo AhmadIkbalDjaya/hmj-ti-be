@@ -60,6 +60,18 @@ class CadreTest extends TestCase
         $response->assertJsonPath('data.0.name', 'John Doe');
     }
 
+    public function test_get_cadres_with_pagination(): void
+    {
+        Cadre::factory()->count(15)->create();
+
+        $response = $this->withToken($this->token)->get($this->base_url.'?page=2&limit=5');
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonCount(5, 'data');
+    }
+
     public function test_get_cadres_unauthenticated(): void
     {
         $response = $this->get($this->base_url);
@@ -290,5 +302,46 @@ class CadreTest extends TestCase
         ]);
 
         $response->assertValidResponse(401);
+    }
+
+    public function test_bulk_destroy_cadres_select_all_with_filters_success(): void
+    {
+        Cadre::factory()->count(5)->create(['status' => CadreStatus::ACTIVE, 'batch' => '2020']);
+        Cadre::factory()->count(3)->create(['status' => CadreStatus::INACTIVE, 'batch' => '2020']);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'select_all' => true,
+                'filters' => [
+                    'status' => 'active',
+                    'batch' => '2020',
+                ],
+            ]);
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonPath('data.deleted_count', 5);
+        $this->assertEquals(3, Cadre::count());
+        $this->assertEquals(0, Cadre::where('status', CadreStatus::ACTIVE)->count());
+    }
+
+    public function test_bulk_destroy_cadres_validation_fails(): void
+    {
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                'ids' => [999], // Non-existent ID
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids.0']);
+
+        $response = $this->withToken($this->token)
+            ->deleteJson("{$this->base_url}/bulk-destroy", [
+                // No ids or select_all
+            ]);
+
+        $response->assertValidResponse(422);
+        $response->assertJsonValidationErrors(['ids']);
     }
 }

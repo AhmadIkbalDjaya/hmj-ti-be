@@ -87,17 +87,14 @@ class CadreController extends Controller
             if ($request->boolean('select_all')) {
                 $exclude_ids = $request->input('exclude_ids', []);
                 $filters = $request->input('filters', []);
+                $search = $filters['search'] ?? '';
+                $batch = $filters['batch'] ?? null;
+                $status = $filters['status'] ?? null;
 
                 $query = Cadre::query()
-                    ->when(isset($filters['search']), function ($query) use ($filters) {
-                        return $query->where('name', 'LIKE', "%{$filters['search']}%");
-                    })
-                    ->when(isset($filters['batch']), function ($query) use ($filters) {
-                        return $query->where('batch', $filters['batch']);
-                    })
-                    ->when(isset($filters['status']), function ($query) use ($filters) {
-                        return $query->where('status', $filters['status']);
-                    })
+                    ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
+                    ->when($batch, fn ($query) => $query->where('batch', $batch))
+                    ->when($status, fn ($query) => $query->where('status', $status))
                     ->whereNotIn('id', $exclude_ids);
 
                 $cadres = $query->get();

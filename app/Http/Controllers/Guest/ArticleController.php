@@ -24,13 +24,11 @@ class ArticleController extends Controller
 
         $articles = Article::query()
             ->select(['id', 'title', 'slug', 'content', 'publish_at', 'image', 'is_featured'])
-            ->where('is_active', true)
+            ->active()
             ->when($search, fn ($query) => $query->where(fn ($query) => $query->where('title', 'LIKE', "%$search%")
                 ->orWhere('content', 'LIKE', "%$search%")
-            )
-            )
-            ->when(! is_null($is_featured), fn ($query) => $query->where('is_featured', $is_featured)
-            )
+            ))
+            ->when(! is_null($is_featured), fn ($query) => $query->where('is_featured', $is_featured))
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 

@@ -22,6 +22,7 @@ class ComplaintResource extends JsonResource
             'institute' => $this->institute,
             'description' => $this->description,
             'is_read' => $this->is_read,
+            'created_at' => $this->created_at,
         ];
     }
 }

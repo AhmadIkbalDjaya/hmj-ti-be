@@ -20,7 +20,7 @@ class BusinessController extends Controller
         $limit = $request->input('limit', 10);
 
         $businesses = Business::query()
-            ->where('is_active', true)
+            ->active()
             ->latest()
             ->paginate($limit, ['*'], 'page', $page);
 
