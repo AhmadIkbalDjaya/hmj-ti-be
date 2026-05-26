@@ -1,66 +1,183 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# HMJ TI BE
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend API for the HMJ TI UINAM website and admin dashboard. This service provides public content endpoints for the website and authenticated management endpoints for administrators.
 
-## About Laravel
+## Description
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+HMJ TI BE is a Laravel-based REST API for managing organization profile data, articles, businesses, complaints, positions, members, cadres, and dashboard summaries. It is designed to serve the public HMJ TI website and the HMJ TI admin application.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The API documentation is available at [https://ahmadikbaldjaya.github.io/hmj-ti-be/](https://ahmadikbaldjaya.github.io/hmj-ti-be/).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+- Public APIs for about/profile data, articles, businesses, cadres, organizational structure, and complaint submission.
+- Admin authentication using Laravel Sanctum personal access tokens.
+- Admin dashboard summary endpoint.
+- CRUD management for articles, businesses, positions, members, cadres, and organization profile data.
+- Complaint management with read/unread status and bulk deletion.
+- Search, pagination, and filtering support for list endpoints.
+- Image/file handling through Laravel storage.
+- Database migrations, seeders, factories, feature tests, and OpenAPI validation support.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tech Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP 8.1+
+- Laravel 10
+- Laravel Sanctum
+- MySQL
+- Composer
+- Node.js and NPM
+- Vite
+- PHPUnit
+- Hot Meteor Spectator / OpenAPI
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+Clone the repository:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+git clone https://github.com/AhmadIkbalDjaya/hmj-ti-be.git
+cd hmj-ti-be
+```
 
-### Premium Partners
+Install PHP dependencies:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+composer install
+```
 
-## Contributing
+Install JavaScript dependencies:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+npm install
+```
 
-## Code of Conduct
+Create the environment file:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+For Windows PowerShell:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```powershell
+Copy-Item .env.example .env
+```
 
-## License
+Generate the application key:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan key:generate
+```
+
+Configure the database values in `.env`, then run migrations and seed the default data:
+
+```bash
+php artisan migrate --seed
+```
+
+Create the public storage link:
+
+```bash
+php artisan storage:link
+```
+
+Optional development seed data:
+
+```bash
+php artisan db:seed --class=DevSeeder
+```
+
+## Environment Variables
+
+Variables used by this backend for local API development:
+
+| Variable | Description |
+| --- | --- |
+| `APP_NAME` | Application name. |
+| `APP_ENV` | Application environment, such as `local` or `production`. |
+| `APP_KEY` | Laravel application encryption key. Generate it with `php artisan key:generate`. |
+| `APP_DEBUG` | Enables or disables debug output. Use `false` in production. |
+| `APP_URL` | Base URL of the application. |
+| `DB_CONNECTION` | Database driver. The default is `mysql`. |
+| `DB_HOST` | Database host. |
+| `DB_PORT` | Database port. |
+| `DB_DATABASE` | Database name. |
+| `DB_USERNAME` | Database username. |
+| `DB_PASSWORD` | Database password. |
+| `LOG_CHANNEL` | Laravel logging channel. |
+| `LOG_LEVEL` | Minimum log level. |
+| `CACHE_DRIVER` | Cache driver. |
+| `QUEUE_CONNECTION` | Queue driver. |
+| `SESSION_DRIVER` | Session driver. |
+| `FILESYSTEM_DISK` | Default filesystem disk. |
+| `SPEC_SOURCE` | OpenAPI specification source for Spectator. |
+| `SPEC_PATH` | Path to the OpenAPI documentation files. |
+
+See `.env.example` for the default values.
+
+## Running Locally
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+By default, the API will be available at:
+
+```text
+http://localhost:8000/api
+```
+
+Run the test suite:
+
+```bash
+php artisan test
+```
+
+Build the API documentation:
+
+```bash
+npm run build-api-docs
+```
+
+## Project Structure
+
+```text
+app/
+  Enums/              Application enums.
+  Exceptions/         Exception handling.
+  Http/               Controllers, middleware, requests, and resources.
+  Models/             Eloquent models.
+  Providers/          Laravel service providers.
+  Traits/             Shared response helpers.
+bootstrap/            Laravel bootstrap files.
+config/               Application configuration.
+database/
+  factories/          Model factories.
+  migrations/         Database schema migrations.
+  seeders/            Database seeders and seed data.
+docs/                 API documentation and database documentation.
+  index.html          Generated API documentation page.
+  openapi.json        OpenAPI specification source.
+  database/
+    dbdiagram.txt     Database schema source for the diagram.
+    dbdiagram.png     Rendered database relationship diagram.
+lang/                 Localization files.
+public/               Public entry point and publicly served assets.
+resources/            CSS, JavaScript, and Blade resources.
+routes/               Web, console, channel, and API route definitions.
+storage/              Logs, cache, sessions, and uploaded files.
+tests/                Feature and unit tests.
+```
+
+## Database Diagram
+
+![Database diagram](docs/database/dbdiagram.png)
+
+## Related Repository
+
+- Backend API: [hmj-ti-be](https://github.com/AhmadIkbalDjaya/hmj-ti-be)
+- Public website: [hmj-ti](https://github.com/AhmadIkbalDjaya/hmj-ti)
+- Admin dashboard: [hmj-ti-admin](https://github.com/AhmadIkbalDjaya/hmj-ti-admin)
