@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'user1@gmail.com',
             'password' => bcrypt('password'),
         ]);
+
+        $this->call(OrganizationProfileSeeder::class);
     }
 }

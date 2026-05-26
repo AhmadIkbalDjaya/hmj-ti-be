@@ -37,7 +37,9 @@
         "/articles": {
             "get": {
                 "summary": "Get Articles",
-                "tags": ["Public"],
+                "tags": [
+                    "Public"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -45,7 +47,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -171,7 +177,9 @@
         "/articles/{id}": {
             "get": {
                 "description": "Get article detail",
-                "tags": ["Public"],
+                "tags": [
+                    "Public"
+                ],
                 "summary": "Get Article Detail",
                 "operationId": "get-articles-id",
                 "parameters": [
@@ -186,7 +194,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -291,7 +302,9 @@
         "/businesses": {
             "get": {
                 "summary": "Get Businesses",
-                "tags": ["Public"],
+                "tags": [
+                    "Public"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -299,7 +312,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -415,7 +432,9 @@
         "/complaints": {
             "post": {
                 "summary": "Submit Complaint",
-                "tags": ["Public"],
+                "tags": [
+                    "Public"
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -423,7 +442,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -455,7 +477,10 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": ["name", "description"],
+                                "required": [
+                                    "name",
+                                    "description"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string"
@@ -483,7 +508,9 @@
         "/organizational-structure": {
             "get": {
                 "summary": "Get Organizational Structure",
-                "tags": ["Public"],
+                "tags": [
+                    "Public"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -491,7 +518,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -621,7 +651,9 @@
         "/cadres": {
             "get": {
                 "summary": "Get Cadres",
-                "tags": ["Public"],
+                "tags": [
+                    "Public"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -629,7 +661,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -707,7 +743,9 @@
         "/user/login": {
             "post": {
                 "summary": "Login",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -715,7 +753,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -728,7 +769,10 @@
                                             "x-stoplight": {
                                                 "id": "dtmqqqtpu9d1y"
                                             },
-                                            "required": ["token", "user"],
+                                            "required": [
+                                                "token",
+                                                "user"
+                                            ],
                                             "properties": {
                                                 "token": {
                                                     "type": "string",
@@ -795,7 +839,10 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": ["username", "password"],
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
                                 "properties": {
                                     "username": {
                                         "type": "string",
@@ -826,7 +873,9 @@
         "/user/logout": {
             "get": {
                 "summary": "Logout",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -834,7 +883,9 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message"],
+                                    "required": [
+                                        "message"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -874,7 +925,9 @@
         "/user/dashboard/summary": {
             "get": {
                 "summary": "Dashboard Summary",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -883,7 +936,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -957,7 +1013,9 @@
                                                     "x-stoplight": {
                                                         "id": "onwzh8zzgyiw9"
                                                     },
-                                                    "required": ["total"],
+                                                    "required": [
+                                                        "total"
+                                                    ],
                                                     "properties": {
                                                         "total": {
                                                             "type": "integer",
@@ -1049,7 +1107,9 @@
         "/user/articles": {
             "get": {
                 "summary": "Get Articles",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1057,7 +1117,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -1188,7 +1252,9 @@
             },
             "post": {
                 "summary": "Create Article",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -1196,7 +1262,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -1323,7 +1392,9 @@
             ],
             "get": {
                 "summary": "Get Article Detail",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1331,7 +1402,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -1378,7 +1452,9 @@
             },
             "put": {
                 "summary": "Edit Article",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1386,7 +1462,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -1475,7 +1554,10 @@
                                         "description": "ISO 8601"
                                     },
                                     "image": {
-                                        "type": ["string", "null"],
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
                                         "x-stoplight": {
                                             "id": "amy42valda20y"
                                         },
@@ -1501,7 +1583,9 @@
             },
             "delete": {
                 "summary": "Delete Article",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1509,7 +1593,9 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message"],
+                                    "required": [
+                                        "message"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -1552,7 +1638,9 @@
         "/user/articles/bulk-destroy": {
             "delete": {
                 "summary": "Bulk Delete Article",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1560,7 +1648,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -1634,7 +1725,9 @@
                                         "x-stoplight": {
                                             "id": "jzop41phk4xr9"
                                         },
-                                        "required": ["ids"],
+                                        "required": [
+                                            "ids"
+                                        ],
                                         "properties": {
                                             "ids": {
                                                 "type": "array",
@@ -1654,7 +1747,9 @@
                                         "x-stoplight": {
                                             "id": "jrifpylxe8tmb"
                                         },
-                                        "required": ["select_all"],
+                                        "required": [
+                                            "select_all"
+                                        ],
                                         "properties": {
                                             "select_all": {
                                                 "type": "boolean",
@@ -1713,7 +1808,9 @@
         "/user/businesses": {
             "get": {
                 "summary": "Get Businesses",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1721,7 +1818,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -1805,7 +1906,9 @@
             },
             "post": {
                 "summary": "Create Business",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -1813,7 +1916,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -1906,7 +2012,9 @@
             ],
             "get": {
                 "summary": "Get Business Detail",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1914,7 +2022,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -1952,7 +2063,9 @@
             },
             "put": {
                 "summary": "Edit Business",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1960,7 +2073,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2025,7 +2141,10 @@
                                         "type": "integer"
                                     },
                                     "image": {
-                                        "type": ["string", "null"],
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
                                         "format": "binary"
                                     },
                                     "whatsapp": {
@@ -2042,7 +2161,9 @@
             },
             "delete": {
                 "summary": "Delete Business",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2050,7 +2171,9 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message"],
+                                    "required": [
+                                        "message"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2087,7 +2210,9 @@
         "/user/businesses/bulk-destroy": {
             "delete": {
                 "summary": "Bulk Delete Business",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2095,7 +2220,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2146,7 +2274,9 @@
                                         "x-stoplight": {
                                             "id": "sc5ljjvxxt0sz"
                                         },
-                                        "required": ["ids"],
+                                        "required": [
+                                            "ids"
+                                        ],
                                         "properties": {
                                             "ids": {
                                                 "type": "array",
@@ -2163,7 +2293,9 @@
                                         }
                                     },
                                     {
-                                        "required": ["select_all"],
+                                        "required": [
+                                            "select_all"
+                                        ],
                                         "properties": {
                                             "select_all": {
                                                 "type": "boolean"
@@ -2198,7 +2330,9 @@
         "/user/complaints": {
             "get": {
                 "summary": "Get Complaints",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2206,7 +2340,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2329,7 +2467,9 @@
             ],
             "get": {
                 "summary": "Get Complaint Detail",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2337,7 +2477,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2375,7 +2518,9 @@
             },
             "delete": {
                 "summary": "Delete Complaint",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2383,7 +2528,9 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message"],
+                                    "required": [
+                                        "message"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2420,7 +2567,9 @@
         "/user/complaints/bulk-destroy": {
             "delete": {
                 "summary": "Bulk Delete Complaint",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2428,7 +2577,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2476,7 +2628,9 @@
                             "schema": {
                                 "anyOf": [
                                     {
-                                        "required": ["ids"],
+                                        "required": [
+                                            "ids"
+                                        ],
                                         "properties": {
                                             "ids": {
                                                 "type": "array",
@@ -2487,7 +2641,9 @@
                                         }
                                     },
                                     {
-                                        "required": ["select_all"],
+                                        "required": [
+                                            "select_all"
+                                        ],
                                         "properties": {
                                             "select_all": {
                                                 "type": "boolean"
@@ -2539,7 +2695,9 @@
             ],
             "patch": {
                 "summary": "Toggle Read Complaint",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2547,7 +2705,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -2599,7 +2760,9 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": ["is_read"],
+                                "required": [
+                                    "is_read"
+                                ],
                                 "properties": {
                                     "is_read": {
                                         "type": "boolean",
@@ -2617,7 +2780,9 @@
         "/user/positions": {
             "get": {
                 "summary": "Get Positions",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2625,7 +2790,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2718,7 +2887,9 @@
             },
             "post": {
                 "summary": "Create Position",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -2726,7 +2897,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2777,7 +2951,10 @@
                                         "type": "string"
                                     },
                                     "parent_id": {
-                                        "type": ["integer", "null"]
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ]
                                     },
                                     "level": {
                                         "type": "integer"
@@ -2814,7 +2991,9 @@
             ],
             "get": {
                 "summary": "Get Position Detail",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2822,7 +3001,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2860,7 +3042,9 @@
             },
             "put": {
                 "summary": "Edit Position",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2868,7 +3052,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2925,7 +3112,10 @@
                                         "type": "string"
                                     },
                                     "parent_id": {
-                                        "type": ["integer", "null"]
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ]
                                     },
                                     "level": {
                                         "type": "integer"
@@ -2944,7 +3134,9 @@
             },
             "delete": {
                 "summary": "Delete Position",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2952,7 +3144,9 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message"],
+                                    "required": [
+                                        "message"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -2989,7 +3183,9 @@
         "/user/members": {
             "get": {
                 "summary": "Get Members",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2997,7 +3193,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3098,7 +3298,9 @@
             },
             "post": {
                 "summary": "Create Member",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -3106,7 +3308,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3141,7 +3346,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "type": "object",
-                                "required": ["name", "position_id"],
+                                "required": [
+                                    "name",
+                                    "position_id"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string"
@@ -3179,7 +3387,9 @@
             ],
             "get": {
                 "summary": "Get Member Detail",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3187,7 +3397,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3225,7 +3438,9 @@
             },
             "put": {
                 "summary": "Edit Member",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3233,7 +3448,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3276,13 +3494,19 @@
                         "multipart/form-data": {
                             "schema": {
                                 "type": "object",
-                                "required": ["name", "position_id"],
+                                "required": [
+                                    "name",
+                                    "position_id"
+                                ],
                                 "properties": {
                                     "name": {
                                         "type": "string"
                                     },
                                     "photo": {
-                                        "type": ["string", "null"],
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
                                         "format": "binary"
                                     },
                                     "position_id": {
@@ -3296,7 +3520,9 @@
             },
             "delete": {
                 "summary": "Delete Member",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3304,7 +3530,9 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message"],
+                                    "required": [
+                                        "message"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3341,7 +3569,9 @@
         "/user/members/bulk-destroy": {
             "delete": {
                 "summary": "Bulk Delete Member",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3349,7 +3579,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3397,7 +3630,9 @@
                             "schema": {
                                 "anyOf": [
                                     {
-                                        "required": ["ids"],
+                                        "required": [
+                                            "ids"
+                                        ],
                                         "properties": {
                                             "ids": {
                                                 "type": "array",
@@ -3408,7 +3643,9 @@
                                         }
                                     },
                                     {
-                                        "required": ["select_all"],
+                                        "required": [
+                                            "select_all"
+                                        ],
                                         "properties": {
                                             "select_all": {
                                                 "type": "boolean"
@@ -3443,7 +3680,9 @@
         "/user/cadres": {
             "get": {
                 "summary": "Get Cadres",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3451,7 +3690,11 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data", "meta"],
+                                    "required": [
+                                        "message",
+                                        "data",
+                                        "meta"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -3538,7 +3781,9 @@
             },
             "post": {
                 "summary": "Create Cadre",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -3546,7 +3791,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -3612,7 +3860,10 @@
                                         }
                                     },
                                     "address": {
-                                        "type": ["string", "null"],
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
                                         "x-stoplight": {
                                             "id": "m5yktnqttozyr"
                                         }
@@ -3644,7 +3895,9 @@
         "/user/cadres/{id}": {
             "get": {
                 "summary": "Get Cadre Detail",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3652,7 +3905,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -3699,7 +3955,9 @@
             },
             "put": {
                 "summary": "Edit Cadre",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "Created",
@@ -3707,7 +3965,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3761,7 +4022,10 @@
                                         "type": "string"
                                     },
                                     "address": {
-                                        "type": ["string", "null"]
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ]
                                     },
                                     "batch": {
                                         "type": "string"
@@ -3796,7 +4060,9 @@
             ],
             "delete": {
                 "summary": "Delete Cadre",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3804,7 +4070,9 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message"],
+                                    "required": [
+                                        "message"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -3847,7 +4115,9 @@
         "/user/cadres/bulk-destroy": {
             "delete": {
                 "summary": "Bulk Delete Cadre",
-                "tags": ["Admin"],
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3855,7 +4125,10 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "required": ["message", "data"],
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
                                     "properties": {
                                         "message": {
                                             "type": "string"
@@ -3903,7 +4176,9 @@
                             "schema": {
                                 "anyOf": [
                                     {
-                                        "required": ["ids"],
+                                        "required": [
+                                            "ids"
+                                        ],
                                         "properties": {
                                             "ids": {
                                                 "type": "array",
@@ -3914,7 +4189,9 @@
                                         }
                                     },
                                     {
-                                        "required": ["select_all"],
+                                        "required": [
+                                            "select_all"
+                                        ],
                                         "properties": {
                                             "select_all": {
                                                 "type": "boolean"
@@ -3958,6 +4235,225 @@
                 }
             },
             "parameters": []
+        },
+        "/about": {
+            "get": {
+                "summary": "Get About",
+                "tags": [
+                    "Public"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/About"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "get-about",
+                "description": "Get organization profile for the public about page",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": []
+            }
+        },
+        "/user/organization-profile": {
+            "get": {
+                "summary": "Get Organization Profile",
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrganizationProfile"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "get-user-organization-profile",
+                "description": "Get singleton organization profile data",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update Organization Profile",
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrganizationProfile"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "put-user-organization-profile",
+                "description": "Update singleton organization profile data",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "goal",
+                                    "vision",
+                                    "missions"
+                                ],
+                                "properties": {
+                                    "goal": {
+                                        "type": "string"
+                                    },
+                                    "vision": {
+                                        "type": "string"
+                                    },
+                                    "missions": {
+                                        "type": "array",
+                                        "minItems": 1,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "goal",
+                                    "vision",
+                                    "missions"
+                                ],
+                                "properties": {
+                                    "goal": {
+                                        "type": "string"
+                                    },
+                                    "vision": {
+                                        "type": "string"
+                                    },
+                                    "missions": {
+                                        "type": "array",
+                                        "minItems": 1,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "main_image": {
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "format": "binary"
+                                    },
+                                    "secondary_image": {
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "format": "binary"
+                                    }
+                                }
+                            },
+                            "encoding": {
+                                "missions": {
+                                    "style": "form",
+                                    "explode": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -3968,7 +4464,10 @@
                     "id": "e6yxdqjzuv581"
                 },
                 "type": "object",
-                "required": ["created_at", "updated_at"],
+                "required": [
+                    "created_at",
+                    "updated_at"
+                ],
                 "properties": {
                     "created_at": {
                         "type": "string",
@@ -3992,7 +4491,12 @@
                     "id": "d2bsn5zyb8u4a"
                 },
                 "type": "object",
-                "required": ["page", "limit", "total", "total_page"],
+                "required": [
+                    "page",
+                    "limit",
+                    "total",
+                    "total_page"
+                ],
                 "properties": {
                     "page": {
                         "type": "integer",
@@ -4173,13 +4677,22 @@
                         "type": "string"
                     },
                     "email": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "phone": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "institute": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "description": {
                         "type": "string"
@@ -4191,7 +4704,10 @@
                         }
                     },
                     "read_at": {
-                        "type": ["string", "null"],
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "x-stoplight": {
                             "id": "28yvps6tpinqx"
                         },
@@ -4231,13 +4747,22 @@
                         "type": "string"
                     },
                     "email": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "phone": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "institute": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "description": {
                         "type": "string"
@@ -4277,7 +4802,10 @@
                         "type": "string"
                     },
                     "parent_id": {
-                        "type": ["integer", "null"]
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
                     },
                     "level": {
                         "type": "integer"
@@ -4324,7 +4852,10 @@
                         "x-stoplight": {
                             "id": "yxri6e77vxcky"
                         },
-                        "required": ["id", "name"],
+                        "required": [
+                            "id",
+                            "name"
+                        ],
                         "properties": {
                             "id": {
                                 "type": "integer",
@@ -4405,7 +4936,12 @@
                                 "id": "4yr34puf0cl0a"
                             },
                             "type": "object",
-                            "required": ["id", "name", "photo", "position"],
+                            "required": [
+                                "id",
+                                "name",
+                                "photo",
+                                "position"
+                            ],
                             "properties": {
                                 "id": {
                                     "type": "integer",
@@ -4420,7 +4956,10 @@
                                     }
                                 },
                                 "photo": {
-                                    "type": ["string", "null"],
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
                                     "x-stoplight": {
                                         "id": "81wvwlaave3em"
                                     }
@@ -4442,7 +4981,12 @@
                     "id": "9l9isryvcolg0"
                 },
                 "type": "object",
-                "required": ["id", "name", "batch", "status"],
+                "required": [
+                    "id",
+                    "name",
+                    "batch",
+                    "status"
+                ],
                 "properties": {
                     "id": {
                         "type": "integer",
@@ -4481,7 +5025,13 @@
                     "id": "4y7lolursmr49"
                 },
                 "type": "object",
-                "required": ["id", "name", "address", "batch", "status"],
+                "required": [
+                    "id",
+                    "name",
+                    "address",
+                    "batch",
+                    "status"
+                ],
                 "properties": {
                     "id": {
                         "type": "integer"
@@ -4490,7 +5040,10 @@
                         "type": "string"
                     },
                     "address": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "batch": {
                         "type": "string"
@@ -4528,7 +5081,10 @@
                         "type": "string"
                     },
                     "address": {
-                        "type": ["string", "null"]
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "batch": {
                         "type": "string"
@@ -4556,6 +5112,110 @@
                         "format": "date-time"
                     }
                 }
+            },
+            "OrganizationProfile": {
+                "title": "OrganizationProfile",
+                "type": "object",
+                "required": [
+                    "id",
+                    "goal",
+                    "vision",
+                    "missions",
+                    "main_image",
+                    "secondary_image",
+                    "created_at",
+                    "updated_at"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "goal": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "vision": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "missions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "main_image": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri"
+                    },
+                    "secondary_image": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "About": {
+                "title": "About",
+                "type": "object",
+                "required": [
+                    "goal",
+                    "vision",
+                    "missions",
+                    "main_image",
+                    "secondary_image"
+                ],
+                "properties": {
+                    "goal": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "vision": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "missions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "main_image": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri"
+                    },
+                    "secondary_image": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri"
+                    }
+                }
             }
         },
         "responses": {
@@ -4565,7 +5225,9 @@
                     "application/json": {
                         "schema": {
                             "type": "object",
-                            "required": ["message"],
+                            "required": [
+                                "message"
+                            ],
                             "properties": {
                                 "message": {
                                     "type": "string",
@@ -4584,7 +5246,9 @@
                     "application/json": {
                         "schema": {
                             "type": "object",
-                            "required": ["message"],
+                            "required": [
+                                "message"
+                            ],
                             "properties": {
                                 "message": {
                                     "type": "string",
@@ -4603,7 +5267,9 @@
                     "application/json": {
                         "schema": {
                             "type": "object",
-                            "required": ["message"],
+                            "required": [
+                                "message"
+                            ],
                             "properties": {
                                 "message": {
                                     "type": "string",
@@ -4622,7 +5288,9 @@
                     "application/json": {
                         "schema": {
                             "type": "object",
-                            "required": ["message"],
+                            "required": [
+                                "message"
+                            ],
                             "properties": {
                                 "message": {
                                     "type": "string",
@@ -4641,7 +5309,10 @@
                     "application/json": {
                         "schema": {
                             "type": "object",
-                            "required": ["message", "errors"],
+                            "required": [
+                                "message",
+                                "errors"
+                            ],
                             "properties": {
                                 "message": {
                                     "type": "string",
@@ -4682,7 +5353,9 @@
                     "application/json": {
                         "schema": {
                             "type": "object",
-                            "required": ["message"],
+                            "required": [
+                                "message"
+                            ],
                             "properties": {
                                 "message": {
                                     "type": "string",

@@ -78,7 +78,20 @@ Table cadres {
   name varchar [not null]
   address text [null]
   batch varchar [not null]
-  status cardre_status [not null, default: "active"]
+  status cadre_status [not null, default: "active"]
+
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table organization_profiles {
+  id int PK
+  goal longtext [null]
+  vision longtext [null]
+  missions json [null]
+
+  main_image varchar [null]
+  secondary_image varchar [null]
 
   created_at timestamp
   updated_at timestamp

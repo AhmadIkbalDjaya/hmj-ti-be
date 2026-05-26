@@ -7,6 +7,7 @@ use App\Http\Controllers\User\CadreController;
 use App\Http\Controllers\User\ComplaintController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\MemberController;
+use App\Http\Controllers\User\OrganizationProfileController;
 use App\Http\Controllers\User\PositionController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::prefix('user')->group(function () {
     });
 
     Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('organization-profile', [OrganizationProfileController::class, 'show']);
+        Route::put('organization-profile', [OrganizationProfileController::class, 'update']);
+
         Route::delete('articles/bulk-destroy', [ArticleController::class, 'bulkDestroy']);
         Route::resource('articles', ArticleController::class)->except(['create', 'edit']);
 

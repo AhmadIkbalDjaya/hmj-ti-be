@@ -34,5 +34,6 @@ class DevSeeder extends Seeder
         Complaint::factory()->count(15)->create();
 
         $this->call(OrganizationStructureSeeder::class);
+        $this->call(OrganizationProfileSeeder::class);
     }
 }
