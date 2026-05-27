@@ -4,11 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
-use App\Http\Requests\User\BulkDestroyComplaintRequest;
-use App\Http\Requests\User\ToggleReadComplaintRequest;
+use App\Http\Requests\User\Complaint\BulkDestroyComplaintRequest;
+use App\Http\Requests\User\Complaint\ToggleReadComplaintRequest;
 use App\Http\Resources\MetaPaginateResource;
-use App\Http\Resources\User\ComplaintDetailResource;
-use App\Http\Resources\User\ComplaintResource;
+use App\Http\Resources\User\Complaint\ComplaintDetailResource;
+use App\Http\Resources\User\Complaint\ComplaintResource;
 use App\Models\Complaint;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
-use App\Http\Requests\User\BulkDestroyArticleRequest;
-use App\Http\Requests\User\StoreArticleRequest;
-use App\Http\Requests\User\UpdateArticleRequest;
+use App\Http\Requests\User\Article\BulkDestroyArticleRequest;
+use App\Http\Requests\User\Article\StoreArticleRequest;
+use App\Http\Requests\User\Article\UpdateArticleRequest;
 use App\Http\Resources\MetaPaginateResource;
-use App\Http\Resources\User\ArticleDetailResource;
-use App\Http\Resources\User\ArticleResource;
+use App\Http\Resources\User\Article\ArticleDetailResource;
+use App\Http\Resources\User\Article\ArticleResource;
 use App\Models\Article;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;

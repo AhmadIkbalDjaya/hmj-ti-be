@@ -4,12 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
-use App\Http\Requests\User\BulkDestroyBusinessRequest;
-use App\Http\Requests\User\StoreBusinessRequest;
-use App\Http\Requests\User\UpdateBusinessRequest;
+use App\Http\Requests\User\Business\BulkDestroyBusinessRequest;
+use App\Http\Requests\User\Business\StoreBusinessRequest;
+use App\Http\Requests\User\Business\UpdateBusinessRequest;
 use App\Http\Resources\MetaPaginateResource;
-use App\Http\Resources\User\BusinessDetailResource;
-use App\Http\Resources\User\BusinessResource;
+use App\Http\Resources\User\Business\BusinessDetailResource;
+use App\Http\Resources\User\Business\BusinessResource;
 use App\Models\Business;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;

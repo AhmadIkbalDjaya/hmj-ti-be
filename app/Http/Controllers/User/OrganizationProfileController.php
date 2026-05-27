@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UpdateOrganizationProfileRequest;
-use App\Http\Resources\User\OrganizationProfileResource;
+use App\Http\Requests\User\OrganizationProfile\UpdateOrganizationProfileRequest;
+use App\Http\Resources\User\OrganizationProfile\OrganizationProfileResource;
 use App\Models\OrganizationProfile;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;

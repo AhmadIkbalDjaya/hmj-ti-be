@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Enums\CadreStatus;
+use App\Models\Cadre;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cadre>
+ * @extends Factory<Cadre>
  */
 class CadreFactory extends Factory
 {

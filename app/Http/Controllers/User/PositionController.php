@@ -4,11 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
-use App\Http\Requests\User\StorePositionRequest;
-use App\Http\Requests\User\UpdatePositionRequest;
+use App\Http\Requests\User\Position\StorePositionRequest;
+use App\Http\Requests\User\Position\UpdatePositionRequest;
 use App\Http\Resources\MetaPaginateResource;
-use App\Http\Resources\User\PositionDetailResource;
-use App\Http\Resources\User\PositionResource;
+use App\Http\Resources\User\Position\PositionDetailResource;
+use App\Http\Resources\User\Position\PositionResource;
 use App\Models\Position;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;

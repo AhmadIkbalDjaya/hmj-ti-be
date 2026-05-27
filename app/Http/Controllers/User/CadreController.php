@@ -4,12 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateSearchRequest;
-use App\Http\Requests\User\BulkDestroyCadreRequest;
-use App\Http\Requests\User\StoreCadreRequest;
-use App\Http\Requests\User\UpdateCadreRequest;
+use App\Http\Requests\User\Cadre\BulkDestroyCadreRequest;
+use App\Http\Requests\User\Cadre\StoreCadreRequest;
+use App\Http\Requests\User\Cadre\UpdateCadreRequest;
 use App\Http\Resources\MetaPaginateResource;
-use App\Http\Resources\User\CadreDetailResource;
-use App\Http\Resources\User\CadreResource;
+use App\Http\Resources\User\Cadre\CadreDetailResource;
+use App\Http\Resources\User\Cadre\CadreResource;
 use App\Models\Cadre;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
