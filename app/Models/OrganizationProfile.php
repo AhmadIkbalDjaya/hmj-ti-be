@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use App\Observers\OrganizationProfileObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
+#[ObservedBy([OrganizationProfileObserver::class])]
 class OrganizationProfile extends Model
 {
+    public const ABOUT_CACHE_KEY = 'guest.about.profile';
+
     protected $guarded = ['id'];
 
     protected $casts = [

@@ -7,6 +7,7 @@ use App\Http\Resources\Guest\AboutResource;
 use App\Models\OrganizationProfile;
 use App\Traits\HttpResponses;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class AboutController extends Controller
 {
@@ -14,7 +15,11 @@ class AboutController extends Controller
 
     public function show(): JsonResponse
     {
-        $profile = OrganizationProfile::firstOrCreate(['id' => 1]);
+        $profile = Cache::remember(
+            OrganizationProfile::ABOUT_CACHE_KEY,
+            now()->addDay(),
+            fn () => OrganizationProfile::firstOrCreate(['id' => 1])
+        );
 
         return $this->respondSuccess(new AboutResource($profile));
     }

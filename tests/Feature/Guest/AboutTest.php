@@ -4,6 +4,8 @@ namespace Tests\Feature\Guest;
 
 use App\Models\OrganizationProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Spectator\Spectator;
 use Tests\TestCase;
 
@@ -20,6 +22,7 @@ class AboutTest extends TestCase
         $this->withHeaders([
             'Accept' => 'application/json',
         ]);
+        Cache::forget(OrganizationProfile::ABOUT_CACHE_KEY);
     }
 
     protected function createProfile(array $overrides = []): OrganizationProfile
@@ -63,5 +66,28 @@ class AboutTest extends TestCase
 
         $response->assertValidRequest();
         $response->assertValidResponse(200);
+    }
+
+    public function test_get_about_uses_cached_profile(): void
+    {
+        $this->createProfile();
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.goal', 'Public goal');
+
+        DB::table('organization_profiles')
+            ->where('id', 1)
+            ->update([
+                'goal' => 'Database goal',
+                'vision' => 'Database vision',
+                'missions' => json_encode(['Database mission.']),
+            ]);
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.goal', 'Public goal')
+            ->assertJsonPath('data.vision', 'Public vision')
+            ->assertJsonCount(2, 'data.missions');
     }
 }

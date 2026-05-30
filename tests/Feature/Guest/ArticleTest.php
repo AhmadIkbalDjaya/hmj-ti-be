@@ -116,7 +116,7 @@ class ArticleTest extends TestCase
     {
         $article = Article::factory()->create(['is_active' => true]);
 
-        $response = $this->get("{$this->base_url}/{$article->id}");
+        $response = $this->get("{$this->base_url}/{$article->slug}");
 
         $response->assertValidRequest();
         $response->assertValidResponse(200);
@@ -130,7 +130,7 @@ class ArticleTest extends TestCase
     {
         $article = Article::factory()->create(['is_active' => true]);
 
-        $response = $this->get("{$this->base_url}/{$article->id}");
+        $response = $this->get("{$this->base_url}/{$article->slug}");
 
         $response->assertValidRequest();
         $response->assertValidResponse(200);

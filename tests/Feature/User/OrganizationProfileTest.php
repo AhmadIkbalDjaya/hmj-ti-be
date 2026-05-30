@@ -6,6 +6,7 @@ use App\Models\OrganizationProfile;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Spectator\Spectator;
 use Tests\TestCase;
@@ -27,6 +28,7 @@ class OrganizationProfileTest extends TestCase
         $this->withHeaders([
             'Accept' => 'application/json',
         ]);
+        Cache::forget(OrganizationProfile::ABOUT_CACHE_KEY);
 
         $this->user = User::factory()->create();
         $this->token = $this->user->createToken('test-token')->plainTextToken;
@@ -104,6 +106,34 @@ class OrganizationProfileTest extends TestCase
             'goal' => 'Updated goal',
             'vision' => 'Updated vision',
         ]);
+    }
+
+    public function test_update_organization_profile_invalidates_guest_about_cache(): void
+    {
+        $this->createProfile();
+
+        $this->get('/api/about')
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.goal', 'Initial goal');
+
+        $response = $this->withToken($this->token)
+            ->putJson($this->base_url, [
+                'goal' => 'Fresh goal',
+                'vision' => 'Fresh vision',
+                'missions' => [
+                    'Fresh mission one.',
+                    'Fresh mission two.',
+                    'Fresh mission three.',
+                ],
+            ]);
+
+        $response->assertValidResponse(200);
+
+        $this->get('/api/about')
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.goal', 'Fresh goal')
+            ->assertJsonPath('data.vision', 'Fresh vision')
+            ->assertJsonCount(3, 'data.missions');
     }
 
     public function test_update_organization_profile_replaces_images(): void

@@ -5,6 +5,8 @@ namespace Tests\Feature\Guest;
 use App\Models\Member;
 use App\Models\Position;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Spectator\Spectator;
 use Tests\TestCase;
 
@@ -21,6 +23,7 @@ class OrganizationalStructureTest extends TestCase
         $this->withHeaders([
             'Accept' => 'application/json',
         ]);
+        Cache::forget(Position::ORGANIZATIONAL_STRUCTURE_CACHE_KEY);
     }
 
     // -------------------------------------------------------------------------
@@ -142,5 +145,70 @@ class OrganizationalStructureTest extends TestCase
         $response->assertValidResponse(200);
 
         $response->assertJsonCount(0, 'data');
+    }
+
+    public function test_get_organizational_structure_uses_cached_positions(): void
+    {
+        $position = Position::factory()->create([
+            'name' => 'Ketua Umum',
+            'slug' => 'ketua-umum',
+            'is_active' => true,
+            'parent_id' => null,
+        ]);
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.0.name', 'Ketua Umum');
+
+        DB::table('positions')
+            ->where('id', $position->id)
+            ->update(['name' => 'Ketua Baru']);
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.0.name', 'Ketua Umum');
+    }
+
+    public function test_get_organizational_structure_cache_invalidates_when_position_updates(): void
+    {
+        $position = Position::factory()->create([
+            'name' => 'Ketua Umum',
+            'slug' => 'ketua-umum',
+            'is_active' => true,
+            'parent_id' => null,
+        ]);
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.0.name', 'Ketua Umum');
+
+        $position->update(['name' => 'Ketua Baru']);
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.0.name', 'Ketua Baru');
+    }
+
+    public function test_get_organizational_structure_cache_invalidates_when_member_updates(): void
+    {
+        $position = Position::factory()->create([
+            'is_active' => true,
+            'parent_id' => null,
+        ]);
+        $member = Member::factory()->create([
+            'name' => 'Anggota Lama',
+            'position_id' => $position->id,
+            'photo' => null,
+        ]);
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.0.assigned_members.0.name', 'Anggota Lama');
+
+        $member->update(['name' => 'Anggota Baru']);
+
+        $this->get($this->base_url)
+            ->assertValidResponse(200)
+            ->assertJsonPath('data.0.assigned_members.0.name', 'Anggota Baru');
     }
 }
