@@ -1,0 +1,374 @@
+{
+    "position": [
+        {
+            "name": "Ketua Umum",
+            "slug": "ketua-umum",
+            "parent_id": null,
+            "level": 0,
+            "order_index": 0,
+            "is_active": true,
+            "members": [
+                {
+                    "name": "Thariq Putra Aulia Rahmadhana",
+                    "photo": "thariq-putra-aulia-rahmadhana.webp"
+                }
+            ]
+        },
+        {
+            "name": "Sekretaris Umum",
+            "slug": "sekretaris-umum",
+            "parent_id": null,
+            "level": 0,
+            "order_index": 1,
+            "is_active": true,
+            "members": [
+                {
+                    "name": "Muh. Firdaus",
+                    "photo": "muh-firdaus.webp"
+                }
+            ]
+        },
+        {
+            "name": "Wakil Sekretaris Umum",
+            "slug": "wakil-sekretaris-umum",
+            "parent_id": null,
+            "level": 0,
+            "order_index": 2,
+            "is_active": true,
+            "members": [
+                {
+                    "name": "Darmawati",
+                    "photo": "darmawati.webp"
+                }
+            ]
+        },
+        {
+            "name": "Bendahara Umum",
+            "slug": "bendahara-umum",
+            "parent_id": null,
+            "level": 0,
+            "order_index": 1,
+            "is_active": true,
+            "members": [
+                {
+                    "name": "Syarifah Fujina Azzahra",
+                    "photo": "syarifah-fujina-azzahra.webp"
+                }
+            ]
+        },
+        {
+            "name": "Wakil Bendahara Umum",
+            "slug": "wakil-bendahara-umum",
+            "parent_id": null,
+            "level": 0,
+            "order_index": 2,
+            "is_active": true,
+            "members": [
+                {
+                    "name": "Nurul Hasanatunnisa",
+                    "photo": "nurul-hasanatunnisa.webp"
+                }
+            ]
+        },
+        {
+            "name": "Wakil Ketua 1",
+            "slug": "wakil-ketua-1",
+            "parent_id": null,
+            "level": 1,
+            "order_index": 0,
+            "is_active": true,
+            "members": [
+                {
+                    "name": "Rahmat Ramadhan",
+                    "photo": "rahmat-ramadhan.webp"
+                }
+            ],
+            "children": [
+                {
+                    "name": "Keorganisasi & Kaderisasi",
+                    "slug": "keorganisasi-kaderisasi",
+                    "parent_id": null,
+                    "level": 2,
+                    "order_index": 0,
+                    "is_active": true,
+                    "children": [
+                        {
+                            "name": "Ketua Bidang",
+                            "slug": "ketua-bidang",
+                            "parent_id": null,
+                            "level": 3,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Muh. Al-Gazali",
+                                    "photo": "muh-al-gazali.webp"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Anggota",
+                            "slug": "anggota",
+                            "parent_id": null,
+                            "level": 4,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Azizul",
+                                    "photo": "azizul.webp"
+                                },
+                                {
+                                    "name": "Ahmadi Gardi",
+                                    "photo": "ahmadi-gardi.webp"
+                                },
+                                {
+                                    "name": "Ahmad Khildan Ramadani",
+                                    "photo": "ahmad-khildan-ramadani.webp"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Keilmuan",
+                    "slug": "keilmuan",
+                    "parent_id": null,
+                    "level": 2,
+                    "order_index": 1,
+                    "is_active": true,
+                    "children": [
+                        {
+                            "name": "Ketua Bidang",
+                            "slug": "ketua-bidang",
+                            "parent_id": null,
+                            "level": 3,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Aidil Ashyari Umar",
+                                    "photo": "aidil-ashyari-umar.webp"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Anggota",
+                            "slug": "anggota",
+                            "parent_id": null,
+                            "level": 4,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Muhammad Rifky Zauki",
+                                    "photo": "muhammad-rifky-zauki.webp"
+                                },
+                                {
+                                    "name": "Za'im Faturrahman Ilham",
+                                    "photo": "za-im-faturrahman-ilham.webp"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Pengkajian dan Penalaran",
+                    "slug": "pengkajian-penalaran",
+                    "parent_id": null,
+                    "level": 2,
+                    "order_index": 2,
+                    "is_active": true,
+                    "children": [
+                        {
+                            "name": "Ketua Bidang",
+                            "slug": "ketua-bidang",
+                            "parent_id": null,
+                            "level": 3,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Muh. Rian",
+                                    "photo": "muh-rian.webp"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Anggota",
+                            "slug": "anggota",
+                            "parent_id": null,
+                            "level": 4,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Andi Muhadar Abdi Salfah",
+                                    "photo": "andi-muhadar-abdi-salfah.webp"
+                                },
+                                {
+                                    "name": "Muh Gilang Sayu",
+                                    "photo": "muh-gilang-sayu.webp"
+                                },
+                                {
+                                    "name": "Aqilah Zahra",
+                                    "photo": "aqilah-zahra.webp"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Wakil Ketua 2",
+            "slug": "wakil-ketua-2",
+            "parent_id": null,
+            "level": 1,
+            "order_index": 1,
+            "is_active": true,
+            "members": [
+                {
+                    "name": "Muh. Gufransah Jamaluddin",
+                    "photo": "muh-gufransah-jamaluddin.webp"
+                }
+            ],
+            "children": [
+                {
+                    "name": "Kewirausahaan",
+                    "slug": "kewirausahaan",
+                    "parent_id": null,
+                    "level": 2,
+                    "order_index": 0,
+                    "is_active": true,
+                    "children": [
+                        {
+                            "name": "Ketua Bidang",
+                            "slug": "ketua-bidang",
+                            "parent_id": null,
+                            "level": 3,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Nurul Khusnul Khotimah",
+                                    "photo": "nurul-khusnul-khotimah.webp"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Anggota",
+                            "slug": "anggota",
+                            "parent_id": null,
+                            "level": 4,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Muh. Luthfi Mubarak",
+                                    "photo": "muh-luthfi-mubarak.webp"
+                                },
+                                {
+                                    "name": "Hidayat Saleh",
+                                    "photo": "hidayat-saleh.webp"
+                                },
+                                {
+                                    "name": "Musdalifah",
+                                    "photo": "musdalifah.webp"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Minat dan Bakat",
+                    "slug": "minat-bakat",
+                    "parent_id": null,
+                    "level": 2,
+                    "order_index": 1,
+                    "is_active": true,
+                    "children": [
+                        {
+                            "name": "Ketua Bidang",
+                            "slug": "ketua-bidang",
+                            "parent_id": null,
+                            "level": 3,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Muh. Alif Afwan",
+                                    "photo": "muh-alif-afwan.webp"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Anggota",
+                            "slug": "anggota",
+                            "parent_id": null,
+                            "level": 4,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Muhammad Faisal Iskandar",
+                                    "photo": "muhammad-faisal-iskandar.webp"
+                                },
+                                {
+                                    "name": "Muh. Abdul Haris",
+                                    "photo": "muh-abdul-haris.webp"
+                                },
+                                {
+                                    "name": "Nurramadani",
+                                    "photo": "nurramadani.webp"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Humas dan Advokasi",
+                    "slug": "humas-advokasi",
+                    "parent_id": null,
+                    "level": 2,
+                    "order_index": 2,
+                    "is_active": true,
+                    "children": [
+                        {
+                            "name": "Ketua Bidang",
+                            "slug": "ketua-bidang",
+                            "parent_id": null,
+                            "level": 3,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "M.Maruf Amiruddin",
+                                    "photo": "m-maruf-amiruddin.webp"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Anggota",
+                            "slug": "anggota",
+                            "parent_id": null,
+                            "level": 4,
+                            "order_index": 0,
+                            "is_active": true,
+                            "members": [
+                                {
+                                    "name": "Muqsith Hidayat",
+                                    "photo": "muqsith-hidayat.webp"
+                                },
+                                {
+                                    "name": "Radhiah Mardhia",
+                                    "photo": "radhiah-mardhia.webp"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

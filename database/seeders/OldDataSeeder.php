@@ -21,6 +21,8 @@ class OldDataSeeder extends Seeder
         $this->seedArticles();
         $this->seedBusinesses();
         $this->seedCadres();
+
+        $this->call(OldOrganizationStructureSeeder::class);
     }
 
     private function seedArticles(): void
