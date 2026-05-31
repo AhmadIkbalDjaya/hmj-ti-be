@@ -13,6 +13,7 @@ The API documentation is available at [https://ahmadikbaldjaya.github.io/hmj-ti-
 - Public APIs for about/profile data, articles, businesses, cadres, organizational structure, and complaint submission.
 - Admin authentication using Laravel Sanctum personal access tokens.
 - Admin dashboard summary endpoint.
+- Authenticated global search endpoint for admin data across articles, businesses, positions, members, complaints, and cadres.
 - CRUD management for articles, businesses, positions, members, cadres, and organization profile data.
 - Complaint management with read/unread status and bulk deletion.
 - Search, pagination, and filtering support for list endpoints.

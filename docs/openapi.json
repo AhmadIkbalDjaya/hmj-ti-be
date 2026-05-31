@@ -1104,6 +1104,74 @@
                 ]
             }
         },
+        "/user/search": {
+            "get": {
+                "summary": "Global Search",
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "message",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/GlobalSearchResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "operationId": "get-user-search",
+                "description": "Search admin records across modules",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/accept-json"
+                    },
+                    {
+                        "$ref": "#/components/parameters/search"
+                    },
+                    {
+                        "schema": {
+                            "type": "integer",
+                            "default": 5,
+                            "minimum": 1,
+                            "maximum": 10
+                        },
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "description": "Number of items to return per module"
+                    }
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
         "/user/articles": {
             "get": {
                 "summary": "Get Articles",
@@ -4521,6 +4589,92 @@
                         "x-stoplight": {
                             "id": "jnmsbs1v42q3q"
                         }
+                    }
+                }
+            },
+            "GlobalSearchResponse": {
+                "title": "GlobalSearchResponse",
+                "type": "object",
+                "required": [
+                    "query",
+                    "total",
+                    "groups"
+                ],
+                "properties": {
+                    "query": {
+                        "type": "string"
+                    },
+                    "total": {
+                        "type": "integer"
+                    },
+                    "groups": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalSearchGroup"
+                        }
+                    }
+                }
+            },
+            "GlobalSearchGroup": {
+                "title": "GlobalSearchGroup",
+                "type": "object",
+                "required": [
+                    "type",
+                    "label",
+                    "route",
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "articles",
+                            "businesses",
+                            "positions",
+                            "members",
+                            "complaints",
+                            "cadres"
+                        ]
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "route": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GlobalSearchResult"
+                        }
+                    }
+                }
+            },
+            "GlobalSearchResult": {
+                "title": "GlobalSearchResult",
+                "type": "object",
+                "required": [
+                    "id",
+                    "title",
+                    "subtitle",
+                    "url"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "subtitle": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
                     }
                 }
             },
