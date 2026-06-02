@@ -18,6 +18,7 @@ class MemberResource extends JsonResource
         return array_filter([
             'id' => $this->id,
             'name' => $this->name,
+            'gender' => $this->gender,
             'photo' => $this->photo,
             'position' => new IdNameResource($this->position),
         ], fn ($value) => ! is_null($value));

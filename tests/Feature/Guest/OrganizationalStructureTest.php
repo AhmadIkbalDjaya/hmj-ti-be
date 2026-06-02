@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Guest;
 
+use App\Enums\Gender;
 use App\Models\Member;
 use App\Models\Position;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -101,6 +102,7 @@ class OrganizationalStructureTest extends TestCase
         ]);
 
         Member::factory()->count(3)->create([
+            'gender' => Gender::FEMALE->value,
             'position_id' => $position->id,
             'photo' => null,
         ]);
@@ -111,6 +113,7 @@ class OrganizationalStructureTest extends TestCase
         $response->assertValidResponse(200);
 
         $response->assertJsonCount(3, 'data.0.assigned_members');
+        $response->assertJsonPath('data.0.assigned_members.0.gender', Gender::FEMALE->value);
     }
 
     public function test_get_organizational_structure_excludes_inactive_children(): void

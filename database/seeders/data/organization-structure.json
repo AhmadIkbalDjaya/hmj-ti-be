@@ -10,6 +10,7 @@
             "members": [
                 {
                     "name": "Thariq Putra Aulia Rahmadhana",
+                    "gender": "male",
                     "photo": "thariq-putra-aulia-rahmadhana.webp"
                 }
             ]
@@ -24,6 +25,7 @@
             "members": [
                 {
                     "name": "Muh. Firdaus",
+                    "gender": "male",
                     "photo": "muh-firdaus.webp"
                 }
             ]
@@ -38,6 +40,7 @@
             "members": [
                 {
                     "name": "Darmawati",
+                    "gender": "female",
                     "photo": "darmawati.webp"
                 }
             ]
@@ -52,6 +55,7 @@
             "members": [
                 {
                     "name": "Syarifah Fujina Azzahra",
+                    "gender": "female",
                     "photo": "syarifah-fujina-azzahra.webp"
                 }
             ]
@@ -66,6 +70,7 @@
             "members": [
                 {
                     "name": "Nurul Hasanatunnisa",
+                    "gender": "female",
                     "photo": "nurul-hasanatunnisa.webp"
                 }
             ]
@@ -80,6 +85,7 @@
             "members": [
                 {
                     "name": "Rahmat Ramadhan",
+                    "gender": "male",
                     "photo": "rahmat-ramadhan.webp"
                 }
             ],
@@ -102,6 +108,7 @@
                             "members": [
                                 {
                                     "name": "Muh. Al-Gazali",
+                                    "gender": "male",
                                     "photo": "muh-al-gazali.webp"
                                 }
                             ]
@@ -116,14 +123,17 @@
                             "members": [
                                 {
                                     "name": "Azizul",
+                                    "gender": "male",
                                     "photo": "azizul.webp"
                                 },
                                 {
                                     "name": "Ahmadi Gardi",
+                                    "gender": "male",
                                     "photo": "ahmadi-gardi.webp"
                                 },
                                 {
                                     "name": "Ahmad Khildan Ramadani",
+                                    "gender": "male",
                                     "photo": "ahmad-khildan-ramadani.webp"
                                 }
                             ]
@@ -148,6 +158,7 @@
                             "members": [
                                 {
                                     "name": "Aidil Ashyari Umar",
+                                    "gender": "male",
                                     "photo": "aidil-ashyari-umar.webp"
                                 }
                             ]
@@ -162,10 +173,12 @@
                             "members": [
                                 {
                                     "name": "Muhammad Rifky Zauki",
+                                    "gender": "male",
                                     "photo": "muhammad-rifky-zauki.webp"
                                 },
                                 {
                                     "name": "Za'im Faturrahman Ilham",
+                                    "gender": "male",
                                     "photo": "za-im-faturrahman-ilham.webp"
                                 }
                             ]
@@ -190,6 +203,7 @@
                             "members": [
                                 {
                                     "name": "Muh. Rian",
+                                    "gender": "male",
                                     "photo": "muh-rian.webp"
                                 }
                             ]
@@ -204,14 +218,17 @@
                             "members": [
                                 {
                                     "name": "Andi Muhadar Abdi Salfah",
+                                    "gender": "male",
                                     "photo": "andi-muhadar-abdi-salfah.webp"
                                 },
                                 {
                                     "name": "Muh Gilang Sayu",
+                                    "gender": "male",
                                     "photo": "muh-gilang-sayu.webp"
                                 },
                                 {
                                     "name": "Aqilah Zahra",
+                                    "gender": "female",
                                     "photo": "aqilah-zahra.webp"
                                 }
                             ]
@@ -230,6 +247,7 @@
             "members": [
                 {
                     "name": "Muh. Gufransah Jamaluddin",
+                    "gender": "male",
                     "photo": "muh-gufransah-jamaluddin.webp"
                 }
             ],
@@ -252,6 +270,7 @@
                             "members": [
                                 {
                                     "name": "Nurul Khusnul Khotimah",
+                                    "gender": "female",
                                     "photo": "nurul-khusnul-khotimah.webp"
                                 }
                             ]
@@ -266,14 +285,17 @@
                             "members": [
                                 {
                                     "name": "Muh. Luthfi Mubarak",
+                                    "gender": "male",
                                     "photo": "muh-luthfi-mubarak.webp"
                                 },
                                 {
                                     "name": "Hidayat Saleh",
+                                    "gender": "male",
                                     "photo": "hidayat-saleh.webp"
                                 },
                                 {
                                     "name": "Musdalifah",
+                                    "gender": "female",
                                     "photo": "musdalifah.webp"
                                 }
                             ]
@@ -298,6 +320,7 @@
                             "members": [
                                 {
                                     "name": "Muh. Alif Afwan",
+                                    "gender": "male",
                                     "photo": "muh-alif-afwan.webp"
                                 }
                             ]
@@ -312,14 +335,17 @@
                             "members": [
                                 {
                                     "name": "Muhammad Faisal Iskandar",
+                                    "gender": "male",
                                     "photo": "muhammad-faisal-iskandar.webp"
                                 },
                                 {
                                     "name": "Muh. Abdul Haris",
+                                    "gender": "male",
                                     "photo": "muh-abdul-haris.webp"
                                 },
                                 {
                                     "name": "Nurramadani",
+                                    "gender": "female",
                                     "photo": "nurramadani.webp"
                                 }
                             ]
@@ -344,6 +370,7 @@
                             "members": [
                                 {
                                     "name": "M.Maruf Amiruddin",
+                                    "gender": "male",
                                     "photo": "m-maruf-amiruddin.webp"
                                 }
                             ]
@@ -358,10 +385,12 @@
                             "members": [
                                 {
                                     "name": "Muqsith Hidayat",
+                                    "gender": "male",
                                     "photo": "muqsith-hidayat.webp"
                                 },
                                 {
                                     "name": "Radhiah Mardhia",
+                                    "gender": "female",
                                     "photo": "radhiah-mardhia.webp"
                                 }
                             ]

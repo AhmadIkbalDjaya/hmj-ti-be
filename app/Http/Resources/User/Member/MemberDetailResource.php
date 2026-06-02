@@ -18,6 +18,7 @@ class MemberDetailResource extends JsonResource
         return array_filter([
             'id' => $this->id,
             'name' => $this->name,
+            'gender' => $this->gender,
             'photo' => $this->photo_url,
             'position' => new IdNameResource($this->position),
             'created_at' => $this->created_at,

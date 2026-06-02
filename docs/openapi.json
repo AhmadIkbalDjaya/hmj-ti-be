@@ -3277,7 +3277,8 @@
                                                 "required": [
                                                     "id",
                                                     "name",
-                                                    "position"
+                                                    "position",
+                                                    "gender"
                                                 ],
                                                 "properties": {
                                                     "id": {
@@ -3285,6 +3286,13 @@
                                                     },
                                                     "name": {
                                                         "type": "string"
+                                                    },
+                                                    "gender": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "male",
+                                                            "female"
+                                                        ]
                                                     },
                                                     "photo": {
                                                         "type": "string"
@@ -3416,11 +3424,19 @@
                                 "type": "object",
                                 "required": [
                                     "name",
-                                    "position_id"
+                                    "position_id",
+                                    "gender"
                                 ],
                                 "properties": {
                                     "name": {
                                         "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "enum": [
+                                            "male",
+                                            "female"
+                                        ]
                                     },
                                     "photo": {
                                         "type": "string",
@@ -3564,11 +3580,19 @@
                                 "type": "object",
                                 "required": [
                                     "name",
-                                    "position_id"
+                                    "position_id",
+                                    "gender"
                                 ],
                                 "properties": {
                                     "name": {
                                         "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "enum": [
+                                            "male",
+                                            "female"
+                                        ]
                                     },
                                     "photo": {
                                         "type": [
@@ -4988,7 +5012,8 @@
                     "name",
                     "position",
                     "created_at",
-                    "updated_at"
+                    "updated_at",
+                    "gender"
                 ],
                 "properties": {
                     "id": {
@@ -4996,6 +5021,13 @@
                     },
                     "name": {
                         "type": "string"
+                    },
+                    "gender": {
+                        "type": "string",
+                        "enum": [
+                            "male",
+                            "female"
+                        ]
                     },
                     "photo": {
                         "type": "string",
@@ -5094,7 +5126,8 @@
                                 "id",
                                 "name",
                                 "photo",
-                                "position"
+                                "position",
+                                "gender"
                             ],
                             "properties": {
                                 "id": {
@@ -5108,6 +5141,13 @@
                                     "x-stoplight": {
                                         "id": "ovbldsfixhz7o"
                                     }
+                                },
+                                "gender": {
+                                    "type": "string",
+                                    "enum": [
+                                        "male",
+                                        "female"
+                                    ]
                                 },
                                 "photo": {
                                     "type": [
@@ -5370,6 +5410,14 @@
                         "format": "uri"
                     }
                 }
+            },
+            "Gender": {
+                "title": "Gender",
+                "type": "string",
+                "enum": [
+                    "male",
+                    "female"
+                ]
             }
         },
         "responses": {

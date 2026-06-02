@@ -27,7 +27,7 @@ class MemberController extends Controller
         $position_id = $request->input('position_id', null);
 
         $members = Member::query()
-            ->select(['id', 'name', 'photo', 'position_id'])
+            ->select(['id', 'name', 'gender', 'photo', 'position_id'])
             ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
             ->when($position_id, fn ($query) => $query->where('position_id', $position_id))
             ->latest()

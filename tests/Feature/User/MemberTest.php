@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\User;
 
+use App\Enums\Gender;
 use App\Models\Member;
 use App\Models\Position;
 use App\Models\User;
@@ -122,6 +123,7 @@ class MemberTest extends TestCase
 
         $response->assertJsonPath('data.id', $member->id);
         $response->assertJsonPath('data.name', $member->name);
+        $response->assertJsonPath('data.gender', $member->gender->value);
         $response->assertJsonPath('data.position.id', $position->id);
     }
 
@@ -155,6 +157,7 @@ class MemberTest extends TestCase
 
         $payload = [
             'name' => 'Ahmad Ikbal',
+            'gender' => Gender::MALE->value,
             'photo' => UploadedFile::fake()->image('member.jpg'),
             'position_id' => $position->id,
         ];
@@ -165,10 +168,12 @@ class MemberTest extends TestCase
         $response->assertValidResponse(201);
 
         $response->assertJsonPath('data.name', $payload['name']);
+        $response->assertJsonPath('data.gender', $payload['gender']);
         $response->assertJsonPath('data.position.id', $position->id);
 
         $this->assertDatabaseHas('members', [
             'name' => $payload['name'],
+            'gender' => $payload['gender'],
             'position_id' => $position->id,
         ]);
     }
@@ -179,6 +184,7 @@ class MemberTest extends TestCase
 
         $payload = [
             'name' => 'Ahmad Ikbal',
+            'gender' => Gender::FEMALE->value,
             'position_id' => $position->id,
         ];
 
@@ -188,6 +194,7 @@ class MemberTest extends TestCase
         $response->assertValidResponse(201);
 
         $response->assertJsonPath('data.name', $payload['name']);
+        $response->assertJsonPath('data.gender', $payload['gender']);
     }
 
     public function test_store_member_unauthenticated(): void
@@ -196,6 +203,7 @@ class MemberTest extends TestCase
 
         $payload = [
             'name' => 'Ahmad Ikbal',
+            'gender' => Gender::MALE->value,
             'position_id' => $position->id,
         ];
 
@@ -217,7 +225,7 @@ class MemberTest extends TestCase
         $response->assertValidResponse(422);
 
         $response->assertJsonValidationErrors([
-            'name', 'position_id',
+            'name', 'gender', 'position_id',
         ]);
     }
 
@@ -225,6 +233,7 @@ class MemberTest extends TestCase
     {
         $payload = [
             'name' => 'Ahmad Ikbal',
+            'gender' => Gender::MALE->value,
             'position_id' => 999,
         ];
 
@@ -234,6 +243,24 @@ class MemberTest extends TestCase
         $response->assertValidResponse(422);
 
         $response->assertJsonValidationErrors(['position_id']);
+    }
+
+    public function test_store_member_validation_fails_when_gender_invalid(): void
+    {
+        $position = Position::factory()->create();
+
+        $payload = [
+            'name' => 'Ahmad Ikbal',
+            'gender' => 'unknown',
+            'position_id' => $position->id,
+        ];
+
+        $response = $this->withToken($this->token)
+            ->post($this->base_url, $payload);
+
+        $response->assertValidResponse(422);
+
+        $response->assertJsonValidationErrors(['gender']);
     }
 
     // -------------------------------------------------------------------------
@@ -249,6 +276,7 @@ class MemberTest extends TestCase
 
         $payload = [
             'name' => 'Updated Name',
+            'gender' => Gender::FEMALE->value,
             'photo' => null,
             'position_id' => $newPosition->id,
         ];
@@ -259,11 +287,13 @@ class MemberTest extends TestCase
         $response->assertValidResponse(200);
 
         $response->assertJsonPath('data.name', 'Updated Name');
+        $response->assertJsonPath('data.gender', Gender::FEMALE->value);
         $response->assertJsonPath('data.position.id', $newPosition->id);
 
         $this->assertDatabaseHas('members', [
             'id' => $member->id,
             'name' => 'Updated Name',
+            'gender' => Gender::FEMALE->value,
             'position_id' => $newPosition->id,
         ]);
     }
@@ -283,6 +313,7 @@ class MemberTest extends TestCase
 
         $payload = [
             'name' => 'Updated Name',
+            'gender' => Gender::MALE->value,
             'photo' => UploadedFile::fake()->image('new.jpg'),
             'position_id' => $position->id,
         ];
@@ -304,6 +335,7 @@ class MemberTest extends TestCase
 
         $payload = [
             'name' => 'Updated Name',
+            'gender' => Gender::MALE->value,
             'position_id' => $member->position_id,
         ];
 
@@ -318,6 +350,7 @@ class MemberTest extends TestCase
 
         $payload = [
             'name' => 'Updated Name',
+            'gender' => Gender::MALE->value,
             'position_id' => $position->id,
         ];
 
@@ -342,7 +375,7 @@ class MemberTest extends TestCase
         $response->assertValidResponse(422);
 
         $response->assertJsonValidationErrors([
-            'name', 'position_id',
+            'name', 'gender', 'position_id',
         ]);
     }
 

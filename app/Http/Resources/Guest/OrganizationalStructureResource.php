@@ -23,6 +23,7 @@ class OrganizationalStructureResource extends JsonResource
             'assigned_members' => $this->members->map(fn ($member) => [
                 'id' => $member->id,
                 'name' => $member->name,
+                'gender' => $member->gender,
                 'photo' => $member->photo_url,
                 'position' => $this->name,
             ]),

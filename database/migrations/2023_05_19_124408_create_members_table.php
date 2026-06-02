@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('gender')->default('male');
             $table->string('photo')->nullable();
             $table->foreignId('position_id')->constrained('positions')->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();

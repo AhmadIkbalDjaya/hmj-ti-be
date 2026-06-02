@@ -23,14 +23,14 @@ class OrganizationalStructureController extends Controller
                 ->where('is_active', true)
                 ->whereNull('parent_id')
                 ->with([
-                    'members:id,name,photo,position_id',
+                    'members:id,name,gender,photo,position_id',
                     'children' => function ($query) {
                         $query->where('is_active', true)
                             ->with([
-                                'members:id,name,photo,position_id',
+                                'members:id,name,gender,photo,position_id',
                                 'children' => function ($query) {
                                     $query->where('is_active', true)
-                                        ->with('members:id,name,photo,position_id')
+                                        ->with('members:id,name,gender,photo,position_id')
                                         ->orderBy('order_index');
                                 }])
                             ->orderBy('order_index');

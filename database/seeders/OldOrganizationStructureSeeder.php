@@ -70,6 +70,7 @@ class OldOrganizationStructureSeeder extends Seeder
             foreach ($positionData['members'] ?? [] as $memberData) {
                 Member::create([
                     'name' => $memberData['name'],
+                    'gender' => $memberData['gender'] ?? 'male',
                     'photo' => $this->storeMemberPhoto($memberData['photo'] ?? null),
                     'position_id' => $position->id,
                 ]);
