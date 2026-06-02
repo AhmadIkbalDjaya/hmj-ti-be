@@ -191,7 +191,7 @@ class PositionTest extends TestCase
         $response->assertValidRequest();
         $response->assertValidResponse(201);
 
-        $response->assertJsonPath('data.parent_id', $parent->id);
+        $response->assertJsonPath('data.parent.id', $parent->id);
     }
 
     public function test_store_position_unauthenticated(): void

@@ -4962,7 +4962,7 @@
                     "id",
                     "name",
                     "slug",
-                    "parent_id",
+                    "parent",
                     "level",
                     "order_index",
                     "is_active",
@@ -4979,10 +4979,26 @@
                     "slug": {
                         "type": "string"
                     },
-                    "parent_id": {
-                        "type": [
-                            "integer",
-                            "null"
+                    "parent": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "required": [
+                                    "id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "null"
+                            }
                         ]
                     },
                     "level": {

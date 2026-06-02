@@ -18,7 +18,10 @@ class PositionDetailResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'parent_id' => $this->parent_id,
+            'parent' => $this->parent ? [
+                'id' => $this->parent->id,
+                'name' => $this->parent->name,
+            ] : null,
             'level' => $this->level,
             'order_index' => $this->order_index,
             'is_active' => $this->is_active,
