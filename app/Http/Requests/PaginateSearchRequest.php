@@ -26,6 +26,7 @@ class PaginateSearchRequest extends FormRequest
             'page' => 'nullable|integer',
             'limit' => 'nullable|integer',
             'search' => 'nullable|string',
+            'parent_id' => 'nullable|integer|exists:positions,id',
         ];
     }
 }

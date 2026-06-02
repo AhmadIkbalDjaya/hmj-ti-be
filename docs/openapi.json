@@ -2876,7 +2876,9 @@
                                                     "name",
                                                     "slug",
                                                     "level",
-                                                    "is_active"
+                                                    "is_active",
+                                                    "parent_id",
+                                                    "order_index"
                                                 ],
                                                 "properties": {
                                                     "id": {
@@ -2888,7 +2890,16 @@
                                                     "slug": {
                                                         "type": "string"
                                                     },
+                                                    "parent_id": {
+                                                        "type": [
+                                                            "integer",
+                                                            "null"
+                                                        ]
+                                                    },
                                                     "level": {
+                                                        "type": "integer"
+                                                    },
+                                                    "order_index": {
                                                         "type": "integer"
                                                     },
                                                     "is_active": {
@@ -2910,6 +2921,9 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -2945,6 +2959,14 @@
                         "in": "query",
                         "name": "level",
                         "description": "Filter By Level"
+                    },
+                    {
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "name": "parent_id",
+                        "description": "Filter by parent position id and return descendants"
                     }
                 ],
                 "security": [

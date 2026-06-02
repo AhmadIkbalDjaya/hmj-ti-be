@@ -24,12 +24,17 @@ class PositionController extends Controller
         $search = $request->input('search', '');
         $is_active = $request->input('is_active', null);
         $level = $request->input('level', null);
+        $parent_id = $request->input('parent_id', null);
+        $descendant_ids = ! is_null($parent_id)
+            ? $this->getDescendantPositionIds((int) $parent_id)
+            : null;
 
         $positions = Position::query()
-            ->select(['id', 'name', 'slug', 'level', 'is_active'])
+            ->select(['id', 'name', 'slug', 'parent_id', 'level', 'order_index', 'is_active'])
             ->when($search, fn ($query) => $query->where('name', 'LIKE', "%$search%"))
             ->when(! is_null($is_active), fn ($query) => $query->where('is_active', $is_active))
             ->when(! is_null($level), fn ($query) => $query->where('level', $level))
+            ->when(! is_null($descendant_ids), fn ($query) => $query->whereIn('id', $descendant_ids))
             ->orderBy('level', 'asc')
             ->orderBy('order_index', 'asc')
             ->paginate($limit, ['*'], 'page', $page);
@@ -38,6 +43,24 @@ class PositionController extends Controller
         $meta = new MetaPaginateResource($positions);
 
         return $this->respondSuccessWithMeta($data, $meta);
+    }
+
+    private function getDescendantPositionIds(int $parent_id): array
+    {
+        $descendant_ids = [];
+        $current_parent_ids = [$parent_id];
+
+        while (! empty($current_parent_ids)) {
+            $children_ids = Position::query()
+                ->whereIn('parent_id', $current_parent_ids)
+                ->pluck('id')
+                ->all();
+
+            $descendant_ids = [...$descendant_ids, ...$children_ids];
+            $current_parent_ids = $children_ids;
+        }
+
+        return $descendant_ids;
     }
 
     public function store(StorePositionRequest $request): JsonResponse

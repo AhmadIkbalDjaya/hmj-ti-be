@@ -36,7 +36,14 @@ class PositionTest extends TestCase
 
     public function test_get_positions_success(): void
     {
-        Position::factory()->count(3)->create();
+        $parent = Position::factory()->create([
+            'parent_id' => null,
+            'order_index' => 1,
+        ]);
+        Position::factory()->count(2)->create([
+            'parent_id' => $parent->id,
+            'order_index' => 2,
+        ]);
 
         $response = $this->withToken($this->token)->get($this->base_url);
 
@@ -44,6 +51,10 @@ class PositionTest extends TestCase
         $response->assertValidResponse(200);
 
         $response->assertJsonCount(3, 'data');
+        $response->assertJsonPath('data.0.parent_id', null);
+        $response->assertJsonPath('data.0.order_index', 1);
+        $response->assertJsonPath('data.1.parent_id', $parent->id);
+        $response->assertJsonPath('data.1.order_index', 2);
     }
 
     public function test_get_positions_with_pagination(): void
@@ -96,6 +107,64 @@ class PositionTest extends TestCase
         $response->assertValidResponse(200);
 
         $response->assertJsonCount(2, 'data');
+    }
+
+    public function test_get_positions_with_parent_id_filter_returns_descendants(): void
+    {
+        $parent = Position::factory()->create(['level' => 1, 'order_index' => 0]);
+        $child = Position::factory()->create([
+            'parent_id' => $parent->id,
+            'level' => 2,
+            'order_index' => 0,
+        ]);
+        $grandchild = Position::factory()->create([
+            'parent_id' => $child->id,
+            'level' => 3,
+            'order_index' => 0,
+        ]);
+        Position::factory()->create(['level' => 2]);
+
+        $response = $this->withToken($this->token)->get($this->base_url."?parent_id={$parent->id}");
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonCount(2, 'data');
+        $responseIds = collect($response->json('data'))->pluck('id')->all();
+
+        $this->assertEquals([$child->id, $grandchild->id], $responseIds);
+        $this->assertNotContains($parent->id, $responseIds);
+    }
+
+    public function test_get_positions_with_parent_id_filter_can_be_narrowed_by_level(): void
+    {
+        $parent = Position::factory()->create(['level' => 1]);
+        $child = Position::factory()->create([
+            'parent_id' => $parent->id,
+            'level' => 2,
+        ]);
+        $grandchild = Position::factory()->create([
+            'parent_id' => $child->id,
+            'level' => 3,
+        ]);
+
+        $response = $this->withToken($this->token)->get($this->base_url."?parent_id={$parent->id}&level=3");
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(200);
+
+        $response->assertJsonCount(1, 'data');
+        $response->assertJsonPath('data.0.id', $grandchild->id);
+    }
+
+    public function test_get_positions_with_invalid_parent_id_fails_validation(): void
+    {
+        $response = $this->withToken($this->token)->get($this->base_url.'?parent_id=999');
+
+        $response->assertValidRequest();
+        $response->assertValidResponse(422);
+
+        $response->assertJsonValidationErrors(['parent_id']);
     }
 
     public function test_get_positions_unauthenticated(): void
